@@ -1,0 +1,39 @@
+---
+// Envoltorio único para <Image /> con la configuración de rendimiento
+// acordada: WebP, calidad 80, tres anchos servidos por srcset, lazy por
+// defecto (eager solo para la foto del hero).
+import { Image } from "astro:assets";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  eager?: boolean;
+  class?: string;
+  widths?: number[];
+  sizes?: string;
+  quality?: number;
+}
+const {
+  src,
+  alt,
+  eager = false,
+  class: klass = "",
+  widths = [400, 800, 1200],
+  sizes = "(max-width: 800px) 100vw, 800px",
+  quality = 80,
+} = Astro.props;
+---
+
+<Image
+  src={src}
+  alt={alt}
+  class={klass}
+  format="webp"
+  quality={quality}
+  width={Math.max(...widths)}
+  widths={widths}
+  sizes={sizes}
+  loading={eager ? "eager" : "lazy"}
+  decoding="async"
+  fetchpriority={eager ? "high" : "auto"}
+/>

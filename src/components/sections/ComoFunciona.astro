@@ -1,0 +1,30 @@
+---
+import { BRAND } from "../../data/brand.js";
+import Photo from "../ui/Photo.astro";
+import procesoImg from "../../assets/img/proceso-tecnologia.jpg";
+---
+
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="proceso-section">
+      <div class="proceso-bg" aria-hidden="true">
+        <Photo src={procesoImg} alt="" widths={[600, 1000, 1600]} />
+      </div>
+
+      <div class="section-head center reveal">
+        <span class="eyebrow">El proceso</span>
+        <h2 class="h2">De la auditoría a la atención 24/7, en cuatro pasos</h2>
+      </div>
+
+      <div class="proceso-grid stagger">
+        {BRAND.proceso.map((p) => (
+          <div class="proceso-card glass-card">
+            <div class="proceso-n">{p.n}</div>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

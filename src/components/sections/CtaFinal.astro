@@ -1,0 +1,26 @@
+---
+import { BRAND } from "../../data/brand.js";
+import Button from "../ui/Button.astro";
+import Photo from "../ui/Photo.astro";
+import ctaImg from "../../assets/img/contacto-profesional.jpg";
+---
+
+<section class="section">
+  <div class="container">
+    <div class="cta-final reveal">
+      <div class="cta-final-photo" aria-hidden="true">
+        <Photo src={ctaImg} alt="" widths={[600, 1000, 1600]} />
+      </div>
+      <span class="eyebrow" style="color:var(--amber-400);">Empecemos</span>
+      <h2 class="h2">¿Hablamos de tu negocio?</h2>
+      <p class="lead">
+        Cuéntanos cómo atiendes hoy a tus clientes y te mostramos, sin compromiso, cómo
+        quedaría con Llamada Atendida trabajando para ti.
+      </p>
+      <div class="hero-actions">
+        <Button href="/contacto" variant="primary" icon="arrow-right">{BRAND.ctaPrimary}</Button>
+        <Button href={BRAND.contact.phoneHref} variant="ghost" icon="phone">Llamar ahora</Button>
+      </div>
+    </div>
+  </div>
+</section>

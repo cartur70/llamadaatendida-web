@@ -1,0 +1,63 @@
+---
+import Icon from "../ui/Icon.astro";
+import Photo from "../ui/Photo.astro";
+import humanosImg from "../../assets/img/equipo-humano-colaboracion.jpg";
+
+const statsIA = ["Disponibilidad 24/7, 365 días", "Respuestas inmediatas, sin esperas", "Resuelve consultas frecuentes al instante", "Cualifica y deriva cuando hace falta"];
+const statsHumano = ["Empatía y cercanía real", "Resuelve casos complejos o sensibles", "Toma decisiones que importan", "Genera confianza a largo plazo"];
+
+const stats = [
+  { value: "24/7", label: "Disponibles, 365 días al año" },
+  { value: "−80%", label: "Menos tiempo de respuesta" },
+  { value: "+35%", label: "Más oportunidades atendidas" },
+  { value: "0", label: "Permanencias mínimas" },
+];
+---
+
+<section class="section">
+  <div class="container">
+    <div class="hibrido-section section reveal" style="padding:clamp(2.5rem,6vw,4rem) clamp(1.5rem,4vw,3rem);">
+      <div class="section-head center">
+        <span class="eyebrow">Sistema híbrido</span>
+        <h2 class="h2">Inteligencia artificial + talento humano</h2>
+        <p class="lead" style="margin-top:1rem;">
+          No es IA o personas. Es la combinación exacta de ambas para que ningún cliente
+          se quede sin respuesta ni sin trato humano donde de verdad lo necesita.
+        </p>
+      </div>
+
+      <div class="hibrido-split">
+        <div class="hibrido-panel">
+          <div class="hibrido-panel-icon"><Icon name="bot" /></div>
+          <h3>IA que responde al instante</h3>
+          <ul>
+            {statsIA.map((s) => (
+              <li><Icon name="check" class="check" />{s}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="hibrido-panel amber">
+          <div class="hibrido-panel-photo">
+            <Photo src={humanosImg} alt="Equipo humano colaborando en la oficina" widths={[400, 700, 1000]} />
+          </div>
+          <div class="hibrido-panel-icon"><Icon name="user-check" /></div>
+          <h3>Humanos que conectan</h3>
+          <ul>
+            {statsHumano.map((s) => (
+              <li><Icon name="check" class="check" />{s}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="hibrido-stats">
+        {stats.map((s) => (
+          <div class="hibrido-stat">
+            <b>{s.value}</b>
+            <span>{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

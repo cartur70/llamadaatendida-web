@@ -1,0 +1,56 @@
+---
+import { BRAND } from "../../data/brand.js";
+import Icon from "../ui/Icon.astro";
+import { Image } from "astro:assets";
+import logo from "../../assets/img/logo.webp";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <Image src={logo} alt={BRAND.name} />
+        <p>{BRAND.description}</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          {BRAND.pilares.map((p) => (
+            <li><a href={`/#servicios`}>{p.title}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="/#como-funciona">Cómo funciona</a></li>
+          <li><a href="/#cotizador">Calcula tu ahorro</a></li>
+          <li><a href="/#confianza">Confianza y cumplimiento</a></li>
+          <li><a href="/contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href={BRAND.contact.phoneHref}>{BRAND.contact.phone}</a></li>
+          <li><a href={`mailto:${BRAND.contact.email}`}>{BRAND.contact.email}</a></li>
+          <li>{BRAND.contact.address}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {year} {BRAND.legalName}. Todos los derechos reservados.</span>
+      <nav aria-label="Legal">
+        <a href="/aviso-legal">Aviso legal</a>
+        <a href="/politica-privacidad">Privacidad</a>
+        <a href="/politica-cookies">Cookies</a>
+      </nav>
+    </div>
+  </div>
+</footer>

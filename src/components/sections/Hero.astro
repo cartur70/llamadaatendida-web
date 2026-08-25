@@ -1,0 +1,97 @@
+---
+import { BRAND } from "../../data/brand.js";
+import Icon from "../ui/Icon.astro";
+import Button from "../ui/Button.astro";
+import Photo from "../ui/Photo.astro";
+import heroPhoto from "../../assets/img/hero-atencion-profesional.jpg";
+---
+
+<section class="hero">
+  <div class="hero-mesh" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">SaaS de atención al cliente 24/7</span>
+        <h1 class="h1 hero-title">
+          <em>{BRAND.tagline}</em>
+        </h1>
+        <p class="lead hero-sub">{BRAND.description}</p>
+
+        <div class="hero-actions">
+          <Button href="/contacto" variant="primary" icon="arrow-right">{BRAND.ctaPrimary}</Button>
+          <Button href={BRAND.contact.whatsapp} variant="ghost" icon="whatsapp">Hablar por WhatsApp</Button>
+        </div>
+
+        <div class="hero-trust stagger">
+          {BRAND.beneficios.map((b) => (
+            <div class="hero-trust-item glass-card">
+              <Icon name={b.icon} />
+              <span>{b.title}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" style="transition-delay:.15s">
+        <div class="hero-photo-frame">
+          <Photo src={heroPhoto} alt="Profesional atendiendo a un cliente por teléfono mientras trabaja en su portátil" eager widths={[500, 900, 1300]} sizes="(max-width: 960px) 90vw, 560px" />
+        </div>
+
+        <div class="hero-badge-float b1 glass-card">
+          <Icon name="shield" />
+          RGPD cumplido
+        </div>
+        <div class="hero-badge-float b2 glass-card">
+          <Icon name="check-circle" />
+          Sin permanencia
+        </div>
+
+        <div class="hero-panel glass-card">
+          <div class="hero-panel-head">
+            <span class="hero-panel-dot"></span>
+            <span class="hero-panel-dot amber"></span>
+            <span class="hero-panel-dot mute"></span>
+            <span style="margin-left:auto;font-size:.78rem;font-weight:700;color:var(--ink-mute);">
+              Llamada entrante · en directo
+            </span>
+          </div>
+
+          <div class="hero-wave" aria-hidden="true">
+            {Array.from({ length: 24 }).map((_, i) => (
+              <span style={`animation-delay:${(i * 0.07).toFixed(2)}s`}></span>
+            ))}
+          </div>
+
+          <div class="hero-panel-row">
+            <span style="display:flex;align-items:center;gap:.6rem;font-size:.85rem;font-weight:700;">
+              <Icon name="bot" style="width:18px;height:18px;color:var(--teal-700);" />
+              Agente IA
+            </span>
+            <span class="badge">Resuelto en 12s</span>
+          </div>
+          <div class="hero-panel-row">
+            <span style="display:flex;align-items:center;gap:.6rem;font-size:.85rem;font-weight:700;">
+              <Icon name="user-check" style="width:18px;height:18px;color:var(--teal-700);" />
+              Escalado humano
+            </span>
+            <span class="badge">Solo si hace falta</span>
+          </div>
+          <div class="hero-panel-row">
+            <span style="display:flex;align-items:center;gap:.6rem;font-size:.85rem;font-weight:700;">
+              <Icon name="shield" style="width:18px;height:18px;color:var(--teal-700);" />
+              Datos protegidos
+            </span>
+            <span class="badge">RGPD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { safe, onReady } from "../../scripts/utils.js";
+  import { initMagnetic } from "../../scripts/effects/magnetic.js";
+
+  onReady(() => safe(initMagnetic, "initMagnetic"));
+</script>

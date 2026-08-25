@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/layout/Nav.astro";
+import Footer from "../components/layout/Footer.astro";
+import { BRAND } from "../data/brand.js";
+---
+
+<BaseLayout title="Aviso legal — Llamada Atendida" description="Información legal del sitio web de Llamada Atendida conforme a la Ley de Servicios de la Sociedad de la Información (LSSI-CE).">
+  <Nav />
+  <main id="main">
+    <section class="legal-page section">
+      <div class="container legal-content">
+        <span class="eyebrow">Legal</span>
+        <h1 class="h2">Aviso legal</h1>
+        <p class="legal-updated">Última actualización: agosto de 2026</p>
+
+        <h2>1. Datos identificativos</h2>
+        <p>
+          En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la
+          Información y de Comercio Electrónico (LSSI-CE), se informa de los siguientes datos:
+        </p>
+        <ul>
+          <li>Denominación: {BRAND.legalName}</li>
+          <li>Domicilio: {BRAND.contact.address}</li>
+          <li>Teléfono: {BRAND.contact.phone}</li>
+          <li>Email: {BRAND.contact.email}</li>
+        </ul>
+
+        <h2>2. Objeto</h2>
+        <p>
+          El presente sitio web tiene como finalidad informar sobre los servicios de atención
+          al cliente automatizada, captación digital, cumplimiento normativo y telecomunicaciones
+          ofrecidos por {BRAND.legalName}, así como facilitar el contacto comercial con la empresa.
+        </p>
+
+        <h2>3. Condiciones de uso</h2>
+        <p>
+          El acceso y uso de este sitio web atribuye la condición de usuario y supone la
+          aceptación de las condiciones aquí recogidas. El usuario se compromete a hacer un uso
+          adecuado de los contenidos y a no emplearlos para incurrir en actividades ilícitas,
+          contrarias a la buena fe o al orden público.
+        </p>
+
+        <h2>4. Propiedad intelectual e industrial</h2>
+        <p>
+          Los contenidos de este sitio web (textos, diseño, logotipos e iconos) son titularidad
+          de {BRAND.legalName} o de terceros que han autorizado su uso, y están protegidos por la
+          normativa de propiedad intelectual e industrial. Queda prohibida su reproducción total
+          o parcial sin autorización expresa.
+        </p>
+
+        <h2>5. Limitación de responsabilidad</h2>
+        <p>
+          {BRAND.legalName} no garantiza la ausencia de errores en el acceso al sitio web ni en
+          su contenido, ni que este se encuentre actualizado en todo momento. Se reserva el
+          derecho a modificar, sin previo aviso, la información contenida en el sitio.
+        </p>
+
+        <h2>6. Legislación aplicable</h2>
+        <p>
+          Las presentes condiciones se rigen por la legislación española. Para cualquier
+          controversia derivada del acceso o uso de este sitio web, las partes se someten a los
+          juzgados y tribunales que correspondan conforme a derecho.
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

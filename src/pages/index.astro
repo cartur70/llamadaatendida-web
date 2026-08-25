@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/layout/Nav.astro";
+import Footer from "../components/layout/Footer.astro";
+import Hero from "../components/sections/Hero.astro";
+import Bridge from "../components/sections/Bridge.astro";
+import Pilares from "../components/sections/Pilares.astro";
+import SistemaHibrido from "../components/sections/SistemaHibrido.astro";
+import Cotizador from "../components/sections/Cotizador.astro";
+import ComoFunciona from "../components/sections/ComoFunciona.astro";
+import Confianza from "../components/sections/Confianza.astro";
+import Faq from "../components/sections/Faq.astro";
+import CtaFinal from "../components/sections/CtaFinal.astro";
+---
+
+<BaseLayout
+  title="Llamada Atendida — El motor comercial, operativo y legal de tu negocio"
+  description="Atención al cliente automatizada 24/7 con agentes de IA y voz. Captación digital, cumplimiento RGPD y seguro de responsabilidad civil, con pago por uso y sin permanencias."
+>
+  <Nav />
+  <main id="main">
+    <Hero />
+    <Bridge />
+    <Pilares />
+    <SistemaHibrido />
+    <Cotizador />
+    <ComoFunciona />
+    <Confianza />
+    <Faq />
+    <CtaFinal />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { safe, onReady } from "../scripts/utils.js";
+  import { initReveal } from "../scripts/effects/reveal.js";
+  import { initCountUp } from "../scripts/effects/countup.js";
+
+  onReady(() => {
+    safe(initReveal, "initReveal");
+    safe(initCountUp, "initCountUp");
+  });
+</script>

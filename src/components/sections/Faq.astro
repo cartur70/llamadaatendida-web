@@ -1,0 +1,25 @@
+---
+import { BRAND } from "../../data/brand.js";
+import Icon from "../ui/Icon.astro";
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="h2">Antes de que preguntes</h2>
+    </div>
+
+    <div class="faq-list reveal" style="transition-delay:.1s">
+      {BRAND.faqs.map((f) => (
+        <details class="faq-item glass-card">
+          <summary class="faq-q">
+            {f.q}
+            <Icon name="chevron-down" />
+          </summary>
+          <div class="faq-a">{f.a}</div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

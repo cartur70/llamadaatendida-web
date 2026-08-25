@@ -1,0 +1,94 @@
+---
+import { COTIZADOR } from "../../data/brand.js";
+import Icon from "../ui/Icon.astro";
+---
+
+<section class="section" id="cotizador">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Calcula tu ahorro</span>
+      <h2 class="h2">¿Cuánto ahorrarías frente a un equipo de teleoperadores?</h2>
+      <p class="lead" style="margin-top:1rem;">
+        Mueve el control con las horas de atención que necesita tu negocio al mes y compara
+        el coste de cubrirlas con personas frente a nuestro sistema híbrido de pago por uso.
+      </p>
+    </div>
+
+    <div class="cotizador-panel glass-card reveal" data-cotizador data-config={JSON.stringify(COTIZADOR)}>
+      <div class="cotizador-controls">
+        <span class="eyebrow eyebrow-sm">Simulador orientativo</span>
+        <h3>Configura tu escenario</h3>
+        <p style="font-size:.9rem;color:var(--ink-mute);">
+          Ajusta las horas mensuales de atención que necesita tu negocio.
+        </p>
+
+        <div class="cotizador-field">
+          <div class="cotizador-field-label">
+            <span>Horas de atención al mes</span>
+            <span data-hours-value>{COTIZADOR.defaultHoras} h/mes</span>
+          </div>
+          <input
+            type="range"
+            data-hours-input
+            min={COTIZADOR.minHoras}
+            max={COTIZADOR.maxHoras}
+            step={COTIZADOR.stepHoras}
+            value={COTIZADOR.defaultHoras}
+            aria-label="Horas de atención al mes"
+          />
+        </div>
+
+        <div class="cotizador-toggle">
+          <div>
+            <strong style="font-family:var(--display);font-size:.92rem;">Cobertura 24/7</strong>
+            <p style="font-size:.8rem;color:var(--ink-mute);margin-top:.15rem;">
+              Incluye noches, fines de semana y festivos
+            </p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" data-247-toggle aria-label="Activar cobertura 24 horas, 7 días" />
+          </label>
+        </div>
+
+        <p class="cotizador-assumptions">
+          Estimación con fines ilustrativos, basada en un coste medio de personal totalmente
+          cargado (Seguridad Social, formación y rotación) frente a la tarifa media de pago por
+          uso del servicio híbrido. No constituye un presupuesto vinculante — solicita el tuyo
+          personalizado en el formulario de contacto.
+        </p>
+      </div>
+
+      <div class="cotizador-result">
+        <div class="result-card humano">
+          <div>
+            <div class="result-label">Equipo de teleoperadores</div>
+            <div class="result-value" data-cost-human>—</div>
+          </div>
+          <Icon name="user-check" style="width:28px;height:28px;color:var(--ink-faint);" />
+        </div>
+        <div class="result-card ia">
+          <div>
+            <div class="result-label">Llamada Atendida</div>
+            <div class="result-value accent" data-cost-ia>—</div>
+          </div>
+          <Icon name="bot" style="width:28px;height:28px;color:var(--teal-700);" />
+        </div>
+
+        <div class="savings-hero">
+          <div class="label">Ahorro estimado al mes</div>
+          <div class="value" data-savings-value>—</div>
+          <div class="sub">
+            <span data-savings-annual>—</span> · <span data-savings-percent>—</span> menos que un equipo humano
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { safe, onReady } from "../../scripts/utils.js";
+  import { initCotizador } from "../../scripts/effects/cotizador.js";
+
+  onReady(() => safe(initCotizador, "initCotizador"));
+</script>

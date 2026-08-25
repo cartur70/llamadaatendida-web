@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/layout/Nav.astro";
+import Footer from "../components/layout/Footer.astro";
+import { BRAND } from "../data/brand.js";
+---
+
+<BaseLayout title="Política de cookies — Llamada Atendida" description="Información sobre el uso de cookies en el sitio web de Llamada Atendida.">
+  <Nav />
+  <main id="main">
+    <section class="legal-page section">
+      <div class="container legal-content">
+        <span class="eyebrow">Legal</span>
+        <h1 class="h2">Política de cookies</h1>
+        <p class="legal-updated">Última actualización: agosto de 2026</p>
+
+        <h2>1. ¿Qué son las cookies?</h2>
+        <p>
+          Las cookies son pequeños archivos que se almacenan en tu navegador al visitar un
+          sitio web. Permiten, entre otras cosas, recordar tus preferencias y analizar el uso
+          del sitio para mejorar tu experiencia.
+        </p>
+
+        <h2>2. Cookies utilizadas en este sitio</h2>
+        <p>
+          Esta versión del sitio web de {BRAND.legalName} no instala cookies analíticas ni de
+          publicidad de terceros. Únicamente podrían utilizarse cookies técnicas, estrictamente
+          necesarias para el funcionamiento del sitio, que no requieren consentimiento conforme
+          al artículo 22.2 de la LSSI-CE.
+        </p>
+
+        <h2>3. Cómo gestionar las cookies</h2>
+        <p>
+          Puedes configurar tu navegador para bloquear o eliminar las cookies almacenadas.
+          Ten en cuenta que deshabilitar determinadas cookies puede afectar al funcionamiento
+          de algunas partes del sitio.
+        </p>
+
+        <h2>4. Más información</h2>
+        <p>
+          Si en el futuro se incorporan herramientas de analítica o marketing que requieran
+          cookies no esenciales, se actualizará esta política y se solicitará el consentimiento
+          correspondiente mediante un panel específico.
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

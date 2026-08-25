@@ -1,0 +1,41 @@
+---
+import { BRAND } from "../../data/brand.js";
+import Icon from "../ui/Icon.astro";
+import Photo from "../ui/Photo.astro";
+import confianzaImg from "../../assets/img/confianza-documentacion.jpg";
+
+const icons = ["shield", "check-circle", "wifi", "coin"];
+---
+
+<section class="section" id="confianza">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Confianza y cumplimiento</span>
+      <h2 class="h2">Tecnología y seguridad jurídica, sin letra pequeña</h2>
+      <p class="lead" style="margin-top:1rem;">
+        No prometemos resultados que no podemos sostener. Prometemos un sistema que cumple
+        la ley, protege tus datos y los de tus clientes, y factura solo por lo que usas.
+      </p>
+    </div>
+
+    <div class="confianza-layout">
+      <div class="confianza-photo reveal">
+        <Photo src={confianzaImg} alt="Firma de un documento sobre la mesa, representando los contratos y el cumplimiento normativo" widths={[400, 700, 1000]} />
+      </div>
+
+      <div class="confianza-grid stagger">
+        {BRAND.confianza.map((c, i) => (
+          <div class="confianza-card glass-card">
+            <div class="icon-tile tone-verde" data-tone>
+              <Icon name={icons[i]} />
+            </div>
+            <div>
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

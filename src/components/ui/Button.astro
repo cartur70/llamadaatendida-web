@@ -1,0 +1,35 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  href?: string;
+  variant?: "primary" | "dark" | "ghost";
+  size?: "md" | "sm";
+  icon?: string;
+  class?: string;
+  type?: "button" | "submit";
+  noMagnetic?: boolean;
+}
+const {
+  href,
+  variant = "primary",
+  size = "md",
+  icon,
+  class: klass = "",
+  type = "button",
+  noMagnetic = false,
+} = Astro.props;
+
+const classes = ["btn", `btn-${variant}`, size === "sm" ? "btn-sm" : "", klass].filter(Boolean).join(" ");
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  class={classes}
+  href={href}
+  type={href ? undefined : type}
+  data-no-magnetic={noMagnetic ? "true" : undefined}
+>
+  <slot />
+  {icon && <Icon name={icon} class="btn-icon" style="width:18px;height:18px;" />}
+</Tag>

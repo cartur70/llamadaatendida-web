@@ -1,0 +1,55 @@
+---
+import { BRAND } from "../../data/brand.js";
+import Icon from "../ui/Icon.astro";
+import Photo from "../ui/Photo.astro";
+import captacionImg from "../../assets/img/captacion-digital-gestion.jpg";
+import atencionImg from "../../assets/img/agentes-ia-voz.jpg";
+import proteccionImg from "../../assets/img/rgpd-cumplimiento-legal.jpg";
+import conectividadImg from "../../assets/img/telecomunicaciones-fibra.jpg";
+
+const pilarImages = {
+  captacion: { src: captacionImg, alt: "Persona gestionando la presencia digital de su negocio desde el portátil" },
+  atencion: { src: atencionImg, alt: "Representación abstracta de una voz digital, propia de un agente de IA" },
+  proteccion: { src: proteccionImg, alt: "Firma de un documento, representando el cumplimiento legal y contractual" },
+  conectividad: { src: conectividadImg, alt: "Cables de fibra óptica iluminados, representando la infraestructura de telecomunicaciones" },
+};
+---
+
+<section class="section" id="servicios">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Cómo lo hacemos</span>
+      <h2 class="h2">Cuatro pilares, un único sistema</h2>
+      <p class="lead" style="margin-top:1rem;">
+        Captación, atención, cumplimiento legal e infraestructura trabajando juntos —
+        no cuatro proveedores distintos que no se hablan entre sí.
+      </p>
+    </div>
+
+    <div class="pilares-grid stagger">
+      {BRAND.pilares.map((p) => (
+        <article class={`pilar-card glass-card tone-${p.color}`}>
+          <div class="pilar-photo">
+            <Photo src={pilarImages[p.id].src} alt={pilarImages[p.id].alt} widths={[320, 500, 700]} sizes="(max-width: 720px) 100vw, 320px" />
+          </div>
+          <div class="pilar-body">
+            <div class="icon-tile" data-tone>
+              <Icon name={p.icon} />
+            </div>
+            <div>
+              <span class="pilar-kicker">{p.kicker}</span>
+              <h3>{p.title}</h3>
+              <p class="short">{p.short}</p>
+            </div>
+            <p style="font-size:.9rem;color:var(--ink-mute);">{p.description}</p>
+            <ul class="pilar-points">
+              {p.points.map((pt) => (
+                <li><Icon name="check" />{pt}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

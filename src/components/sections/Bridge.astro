@@ -1,0 +1,41 @@
+---
+import Icon from "../ui/Icon.astro";
+import Photo from "../ui/Photo.astro";
+import bridgePhoto from "../../assets/img/conexion-humana.jpg";
+
+const puntos = [
+  { title: "El teléfono suena fuera de horario", text: "Y ese cliente, sin respuesta, llama a la competencia." },
+  { title: "Los mensajes de WhatsApp se acumulan", text: "Cada minuto sin contestar es una oportunidad que se enfría." },
+  { title: "Nadie revisa si la web cumple el RGPD", text: "Hasta que llega una reclamación y el problema ya es legal." },
+];
+---
+
+<section class="section bridge">
+  <div class="container bridge-grid">
+    <div class="reveal">
+      <div class="bridge-photo">
+        <Photo src={bridgePhoto} alt="Dos manos que se acercan para conectar, representando la atención que conecta con cada cliente" />
+      </div>
+      <span class="bridge-num" aria-hidden="true">01</span>
+      <h2 class="h2">Que tu negocio no vuelva a perder ni un solo cliente</h2>
+      <p class="lead" style="margin-top:1rem;">
+        La mayoría de negocios pierde oportunidades no por falta de clientes interesados, sino
+        por no poder atenderlos a tiempo, con las garantías legales que exige la ley.
+      </p>
+    </div>
+
+    <div class="reveal" style="transition-delay:.1s">
+      <ul class="bridge-list">
+        {puntos.map((p) => (
+          <li>
+            <Icon name="arrow-right" />
+            <div>
+              <strong>{p.title}</strong>
+              <p>{p.text}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

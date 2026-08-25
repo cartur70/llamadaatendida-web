@@ -1,0 +1,138 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/layout/Nav.astro";
+import Footer from "../components/layout/Footer.astro";
+import Icon from "../components/ui/Icon.astro";
+import Button from "../components/ui/Button.astro";
+import Photo from "../components/ui/Photo.astro";
+import { BRAND } from "../data/brand.js";
+import contactoBg from "../assets/img/ciudad-nocturna.jpg";
+---
+
+<BaseLayout
+  title="Contacto — Llamada Atendida"
+  description="Solicita una demo o habla con nuestro equipo. Te contactamos en menos de 24 horas para mostrarte cómo automatizar la atención de tu negocio."
+>
+  <Nav />
+  <main id="main">
+    <section class="section" style="padding-top:calc(var(--nav-h) + clamp(2.5rem,6vw,4.5rem));position:relative;overflow:clip;">
+      <div class="hero-mesh" aria-hidden="true" style="opacity:.6;"></div>
+      <div class="contact-hero-photo" aria-hidden="true">
+        <Photo src={contactoBg} alt="" widths={[600, 1000, 1600]} />
+      </div>
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Contacto</span>
+          <h1 class="h1" style="font-size:clamp(2.1rem,4.5vw,3.2rem);">Hablemos de tu negocio</h1>
+          <p class="lead" style="margin-top:1rem;">
+            Cuéntanos cómo atiendes hoy a tus clientes. Te respondemos en menos de 24 horas
+            con una propuesta concreta, sin compromiso.
+          </p>
+        </div>
+
+        <div class="hero-grid" style="align-items:start;">
+          <div class="glass-card reveal" style="padding:clamp(1.75rem,4vw,2.75rem);">
+            <form data-contact-form novalidate>
+              <div class="form-grid two">
+                <div class="field">
+                  <label for="nombre">Nombre y apellidos *</label>
+                  <input id="nombre" name="nombre" type="text" required autocomplete="name" />
+                </div>
+                <div class="field">
+                  <label for="empresa">Empresa</label>
+                  <input id="empresa" name="empresa" type="text" autocomplete="organization" />
+                </div>
+              </div>
+
+              <div class="form-grid two" style="margin-top:1.1rem;">
+                <div class="field">
+                  <label for="email">Email *</label>
+                  <input id="email" name="email" type="email" required autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label for="telefono">Teléfono</label>
+                  <input id="telefono" name="telefono" type="tel" autocomplete="tel" />
+                </div>
+              </div>
+
+              <div class="field" style="margin-top:1.1rem;">
+                <label for="mensaje">¿Cómo podemos ayudarte? *</label>
+                <textarea id="mensaje" name="mensaje" required></textarea>
+              </div>
+
+              <div class="field-check" style="margin-top:1.2rem;">
+                <input id="rgpd" name="rgpd" type="checkbox" required />
+                <label for="rgpd">
+                  He leído y acepto la <a href="/politica-privacidad">política de privacidad</a>.
+                  Tus datos se tratan conforme al RGPD únicamente para responder a tu solicitud.
+                </label>
+              </div>
+
+              <div class="form-status" data-form-status role="status"></div>
+
+              <Button type="submit" variant="primary" size="md" class="btn-block" noMagnetic style="margin-top:1.4rem;" data-form-submit>
+                Enviar mensaje
+              </Button>
+            </form>
+          </div>
+
+          <div class="reveal" style="transition-delay:.1s;display:grid;gap:1.5rem;">
+            <div class="contact-info-card glass-card">
+              <div class="contact-info-row">
+                <div class="icon-tile"><Icon name="phone" /></div>
+                <div>
+                  <h4>Teléfono</h4>
+                  <a href={BRAND.contact.phoneHref}>{BRAND.contact.phone}</a>
+                </div>
+              </div>
+              <div class="contact-info-row">
+                <div class="icon-tile"><Icon name="whatsapp" /></div>
+                <div>
+                  <h4>WhatsApp</h4>
+                  <a href={BRAND.contact.whatsapp} target="_blank" rel="noopener">Escríbenos directamente</a>
+                </div>
+              </div>
+              <div class="contact-info-row">
+                <div class="icon-tile"><Icon name="mail" /></div>
+                <div>
+                  <h4>Email</h4>
+                  <a href={`mailto:${BRAND.contact.email}`}>{BRAND.contact.email}</a>
+                </div>
+              </div>
+              <div class="contact-info-row">
+                <div class="icon-tile"><Icon name="map-pin" /></div>
+                <div>
+                  <h4>Dirección</h4>
+                  <p>{BRAND.contact.address}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding:1.75rem;">
+              <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;">
+                <Icon name="clock" style="width:20px;height:20px;color:var(--teal-700);" />
+                <strong style="font-family:var(--display);">Horario de oficina</strong>
+              </div>
+              <p style="font-size:.9rem;color:var(--ink-mute);">
+                Lunes a viernes, 9:00–18:00. Nuestro sistema de atención al cliente,
+                en cambio, no cierra nunca: 24 horas, 7 días a la semana.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { safe, onReady } from "../scripts/utils.js";
+  import { initReveal } from "../scripts/effects/reveal.js";
+  import { initContactForm } from "../scripts/effects/contact-form.js";
+
+  onReady(() => {
+    safe(initReveal, "initReveal");
+    safe(initContactForm, "initContactForm");
+  });
+</script>

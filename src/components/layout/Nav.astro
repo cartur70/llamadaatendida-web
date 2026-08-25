@@ -1,0 +1,52 @@
+---
+import { BRAND } from "../../data/brand.js";
+import Icon from "../ui/Icon.astro";
+import Button from "../ui/Button.astro";
+import logo from "../../assets/img/logo.webp";
+import { Image } from "astro:assets";
+---
+
+<header class="nav" data-nav>
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo" aria-label={`${BRAND.name} — inicio`}>
+      <Image src={logo} alt={BRAND.name} />
+    </a>
+
+    <nav class="nav-links" aria-label="Navegación principal">
+      {BRAND.nav.map((item) => (
+        <a href={item.href} class="nav-link">{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="nav-actions">
+      <Button href="/contacto" size="sm" variant="primary" class="hero-actions-desktop">
+        {BRAND.ctaPrimary}
+      </Button>
+      <button class="nav-burger" data-menu-toggle aria-label="Abrir menú" aria-expanded="false">
+        <Icon name="menu" class="icon-menu" />
+        <Icon name="close" class="icon-close" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" data-mobile-menu>
+  {BRAND.nav.map((item) => (
+    <a href={item.href}>{item.label}</a>
+  ))}
+  <Button href="/contacto" variant="primary">{BRAND.ctaPrimary}</Button>
+</div>
+
+<script>
+  import { safe, onReady } from "../../scripts/utils.js";
+  import { initNav } from "../../scripts/effects/nav.js";
+
+  onReady(() => safe(initNav, "initNav"));
+</script>
+
+<style>
+  .hero-actions-desktop { display: none; }
+  @media (min-width: 620px) {
+    .hero-actions-desktop { display: inline-flex; }
+  }
+</style>

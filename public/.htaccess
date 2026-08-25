@@ -1,0 +1,122 @@
+# ============================================================================
+# .htaccess for premium Astro websites — place at `public/.htaccess` in the
+# project. Astro copies everything in public/ verbatim into dist/ at build
+# time, so this file ends up at the project root of the deployed site
+# automatically. Targets Apache (Hostinger default) and LiteSpeed.
+# ============================================================================
+#
+# What this does:
+# - HTML: never cache — always revalidate (Astro doesn't hash HTML filenames,
+#   since they must stay at predictable URLs for links/bookmarks to work).
+# - _astro/ (Astro's hashed build output — JS, CSS, optimized images):
+#   cache for a full year, immutable. Safe because a content change always
+#   produces a NEW filename — the old one is simply never referenced again.
+# - Other public/ assets (favicon, robots.txt, video files — anything NOT
+#   hashed): moderate cache.
+# - MIME types: ensures the host serves WebP/AVIF and JS correctly.
+# - Compression: gzip text assets when supported.
+# - Security headers: minimal hardening.
+#
+# Doesn't work on Nginx VPS — those need server-level config (see
+# reference/10-deployment-and-cache.md §5 for the alternative).
+#
+# ⚠️ If you're adapting this template for a project that ISN'T Astro (or an
+# Astro project not using output: 'static' with the default _astro/ output
+# directory), double-check the actual build output folder name before relying
+# on the "^_astro/" pattern below.
+
+# ----- Cache duration -----
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML documents — never cache
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # Fallback for CSS/JS not caught by the _astro/ rule below (shouldn't normally
+  # apply to anything in a default Astro static build, kept as a safety net)
+  ExpiresByType text/css "access plus 1 hours"
+  ExpiresByType application/javascript "access plus 1 hours"
+  ExpiresByType text/javascript "access plus 1 hours"
+  ExpiresByType application/json "access plus 1 hours"
+
+  # Media — long cache (hashed images in _astro/ are covered more specifically
+  # below with `immutable`; this covers any unhashed image left in public/)
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/avif "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+
+  # Fonts — cache long, immutable
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+  ExpiresByType application/font-woff "access plus 1 year"
+</IfModule>
+
+# ----- Cache-Control headers -----
+<IfModule mod_headers.c>
+  # HTML always fresh
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # Astro's hashed build output (_astro/): cache forever, immutable.
+  # Content-hashed filenames mean a changed file is a DIFFERENT file — never
+  # a cache-invalidation problem.
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+
+  # Any other JS/CSS/JSON left un-hashed (rare in a default Astro static
+  # build, but safe fallback): revalidate every visit.
+  <FilesMatch "\.(css|js|mjs|json)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # Unhashed images/fonts/icons (things you deliberately kept in public/,
+  # see reference/05-image-and-asset-pipeline.md §5): moderate long cache.
+  <FilesMatch "\.(webp|avif|jpg|jpeg|png|svg|ico|woff|woff2)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  # Video files (never processed by astro:assets — always served from public/)
+  <FilesMatch "\.(mp4|webm)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+
+  # Minimal security headers
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ----- Correct MIME types (some shared hosts default wrong) -----
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType application/javascript .js
+  AddType application/javascript .mjs
+  AddType text/css .css
+  AddType application/json .json
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+  AddType image/svg+xml .svg
+</IfModule>
+
+# ----- Gzip compression for text assets -----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml font/woff font/woff2
+</IfModule>
+
+# ----- HTTPS redirect (uncomment if your domain has SSL) -----
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} !=on
+#   RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+# </IfModule>
+
+# ----- Pretty URLs: Astro's static build already outputs clean folder-style
+# URLs (e.g. /about/index.html served at /about/) for multi-page sites by
+# default — no rewrite rule needed for that, unlike the old vanilla-stack
+# skill which needed one to fake it on top of flat `about.html` files.
