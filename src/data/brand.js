@@ -117,15 +117,17 @@ export const BRAND = {
   ],
 };
 
-// Parámetros del cotizador de ahorro (horas de atención vs. teleoperadores humanos).
+// Parámetros del cotizador de ahorro (llamadas/mes vs. teleoperadores humanos).
 // Cifras orientativas de mercado — se muestran siempre con disclaimer en el propio componente.
 export const COTIZADOR = {
-  minHoras: 40,
-  maxHoras: 720,
-  defaultHoras: 200,
-  stepHoras: 10,
+  minLlamadas: 100,
+  maxLlamadas: 5000,
+  defaultLlamadas: 1200,
+  stepLlamadas: 50,
 
-  costeHoraHumano: 15.5, // €/hora — coste totalmente cargado (SS, formación, rotación, gestión de turnos)
-  costeHoraIA: 4.2, // €/hora — tarifa media de pago por uso del servicio híbrido
-  factorCobertura247: 1.55, // sobrecoste de turnos/festivos/vacaciones para cubrir 24/7 con personas
+  llamadasPorEmpleado: 600, // capacidad media: 30 llamadas/día × 20 días laborables
+  costeEmpleadoMes: 2200, // €/mes — coste empresa totalmente cargado (SS, formación, rotación)
+  costeLlamadaIA: 1.2, // €/llamada — tarifa híbrida IA + humano
+  factorCobertura247Humano: 2.5, // turnos rotativos para cubrir noches, fines de semana y festivos
+  factorCobertura247IA: 1.2, // +20% sobre la tarifa por llamada en cobertura 24/7
 };

@@ -412,36 +412,25 @@ input, textarea, select { font: inherit; color: inherit; }
   background: rgba(255,255,255,0.6); margin-bottom: 0.6rem;
 }
 .hero-panel-row:last-child { margin-bottom: 0; }
-.hero-badge-float {
-  position: absolute; padding: 0.7rem 1rem; border-radius: var(--radius-md);
-  display: flex; align-items: center; gap: 0.55rem;
-  font-weight: 700; font-size: 0.82rem; color: var(--ink-soft);
-  animation: floatY 8s ease-in-out infinite;
-}
-.hero-badge-float.b1 { top: -4%; right: 2%; animation-delay: -2s; }
-.hero-badge-float.b2 { bottom: 4%; left: 2%; animation-delay: -4.5s; }
-@media (min-width: 960px) {
-  .hero-badge-float.b1 { top: -6%; right: -4%; }
-  .hero-badge-float.b2 { bottom: 6%; left: -8%; }
-}
-.hero-badge-float svg { width: 18px; height: 18px; color: var(--amber-600); }
 
 /* =============================================================
    8. Puente problema→solución
    ============================================================= */
 .bridge { position: relative; }
-.bridge-grid { display: grid; gap: 3rem; align-items: start; }
+.bridge-head { max-width: none; margin-bottom: 2.5rem; }
+.bridge-grid { display: grid; gap: 3rem; align-items: stretch; }
 @media (min-width: 860px) {
   .bridge-grid { grid-template-columns: 0.9fr 1.1fr; gap: 4rem; }
 }
 .bridge-photo {
   border-radius: var(--radius-lg); overflow: clip; box-shadow: var(--shadow-md);
-  aspect-ratio: 5 / 4; margin-bottom: 1.75rem;
+  aspect-ratio: 5 / 4;
 }
+@media (min-width: 860px) { .bridge-photo { aspect-ratio: auto; min-height: 100%; } }
 .bridge-photo img { width: 100%; height: 100%; object-fit: cover; }
 .bridge-num { font-family: var(--display); font-size: 3.5rem; font-weight: 800; color: var(--teal-300); line-height: 1; margin-bottom: 1rem; }
-.bridge-list { display: grid; gap: 1.1rem; margin-top: 1.5rem; }
-.bridge-list li { display: flex; gap: 0.85rem; align-items: flex-start; }
+.bridge-list { display: flex; flex-direction: column; justify-content: space-between; gap: 1.1rem; height: 100%; }
+.bridge-list li { display: flex; gap: 0.85rem; align-items: flex-start; padding: 1rem 1.1rem; border-radius: var(--radius-md); }
 .bridge-list svg { width: 22px; height: 22px; color: var(--teal-700); flex-shrink: 0; margin-top: 0.15rem; }
 .bridge-list strong { display: block; color: var(--ink); font-family: var(--display); font-size: 1rem; }
 .bridge-list p { color: var(--ink-mute); font-size: 0.92rem; }
@@ -522,7 +511,19 @@ input, textarea, select { font: inherit; color: inherit; }
 .cotizador-controls h3 { margin-bottom: 0.4rem; }
 .cotizador-field { margin-top: 1.75rem; }
 .cotizador-field-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.7rem; font-family: var(--display); font-weight: 700; font-size: 0.92rem; }
-.cotizador-field-label span[data-hours-value] { color: var(--teal-700); font-size: 1.05rem; }
+.cotizador-field-label span[data-calls-value] { color: var(--teal-700); font-size: 1.05rem; }
+
+.cotizador-number-wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.85rem; }
+.cotizador-number-wrap label { font-size: 0.8rem; color: var(--ink-mute); }
+.cotizador-number-input {
+  width: 6.5rem; padding: 0.5rem 0.7rem; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--line-strong); background: var(--paper);
+  font-family: var(--display); font-weight: 700; text-align: right;
+  transition: border-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+.cotizador-number-input:focus {
+  border-color: var(--teal-600); box-shadow: 0 0 0 4px rgba(23,169,158,0.14); outline: none;
+}
 
 input[type="range"] {
   -webkit-appearance: none; appearance: none;
@@ -570,6 +571,7 @@ input[type="range"]::-moz-range-thumb {
 .result-label { font-size: 0.82rem; color: var(--ink-mute); font-weight: 600; }
 .result-value { font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.1rem); color: var(--ink); }
 .result-value.accent { color: var(--teal-700); }
+.result-sub { font-size: 0.78rem; color: var(--ink-faint); margin-top: 0.2rem; font-weight: 600; }
 
 .savings-hero {
   border-radius: var(--radius-lg); padding: clamp(1.75rem, 4vw, 2.5rem);
@@ -600,10 +602,10 @@ input[type="range"]::-moz-range-thumb {
 /* =============================================================
    13. Confianza
    ============================================================= */
-.confianza-layout { display: grid; gap: 2rem; align-items: start; }
+.confianza-layout { display: grid; gap: 2rem; align-items: stretch; }
 @media (min-width: 900px) { .confianza-layout { grid-template-columns: 0.85fr 1.15fr; gap: 2.5rem; } }
-.confianza-photo { border-radius: var(--radius-lg); overflow: clip; box-shadow: var(--shadow-md); aspect-ratio: 4 / 5; }
-@media (max-width: 899px) { .confianza-photo { aspect-ratio: 16 / 9; } }
+.confianza-photo { border-radius: var(--radius-lg); overflow: clip; box-shadow: var(--shadow-md); aspect-ratio: 16 / 9; }
+@media (min-width: 900px) { .confianza-photo { aspect-ratio: auto; min-height: 100%; } }
 .confianza-photo img { width: 100%; height: 100%; object-fit: cover; }
 .confianza-grid { display: grid; gap: 1.25rem; }
 @media (min-width: 620px) { .confianza-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -616,7 +618,11 @@ input[type="range"]::-moz-range-thumb {
 /* =============================================================
    14. FAQ
    ============================================================= */
-.faq-list { display: grid; gap: 0.9rem; max-width: 780px; }
+.faq-grid { display: grid; gap: 0.9rem; }
+@media (min-width: 768px) {
+  .faq-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; align-items: start; }
+}
+.faq-list { display: grid; gap: 0.9rem; }
 .faq-item { border-radius: var(--radius-md); overflow: clip; }
 .faq-q {
   width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
@@ -755,7 +761,7 @@ input[type="range"]::-moz-range-thumb {
    ============================================================= */
 @media (prefers-reduced-motion: reduce) {
   .hero-mesh, .cta-final::before { animation: none; }
-  .hero-panel, .hero-badge-float { animation: none; }
+  .hero-panel { animation: none; }
   .hero-wave span { animation: none; height: 60%; }
   html { scroll-behavior: auto; }
   /* NO se desactivan: hover, tilt, reveal, mesh estático sigue visible, count-up, botones */

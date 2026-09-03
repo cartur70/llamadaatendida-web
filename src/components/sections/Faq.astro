@@ -1,6 +1,10 @@
 ---
 import { BRAND } from "../../data/brand.js";
 import Icon from "../ui/Icon.astro";
+
+// Reparto equitativo entre dos columnas independientes (4 → 2/2, 8 → 4/4, 10 → 5/5…).
+const half = Math.ceil(BRAND.faqs.length / 2);
+const faqColumns = [BRAND.faqs.slice(0, half), BRAND.faqs.slice(half)];
 ---
 
 <section class="section">
@@ -10,15 +14,19 @@ import Icon from "../ui/Icon.astro";
       <h2 class="h2">Antes de que preguntes</h2>
     </div>
 
-    <div class="faq-list reveal" style="transition-delay:.1s">
-      {BRAND.faqs.map((f) => (
-        <details class="faq-item glass-card">
-          <summary class="faq-q">
-            {f.q}
-            <Icon name="chevron-down" />
-          </summary>
-          <div class="faq-a">{f.a}</div>
-        </details>
+    <div class="faq-grid reveal" style="transition-delay:.1s">
+      {faqColumns.map((column) => (
+        <div class="faq-list">
+          {column.map((f) => (
+            <details class="faq-item glass-card">
+              <summary class="faq-q">
+                {f.q}
+                <Icon name="chevron-down" />
+              </summary>
+              <div class="faq-a">{f.a}</div>
+            </details>
+          ))}
+        </div>
       ))}
     </div>
   </div>

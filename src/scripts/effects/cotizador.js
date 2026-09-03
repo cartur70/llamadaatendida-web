@@ -1,6 +1,7 @@
-// Cotizador de ahorro — compara el coste de cubrir X horas de atención al mes
-// con teleoperadores humanos frente al sistema híbrido IA + humanos de Llamada
-// Atendida. Cifras orientativas (ver disclaimer en el propio componente).
+// Cotizador de ahorro — compara el coste de cubrir X llamadas/mes con un
+// equipo de teleoperadores humanos frente al sistema híbrido IA + humanos
+// de Llamada Atendida. Cifras orientativas (ver disclaimer en el propio
+// componente).
 import { $ } from "../utils.js";
 
 const money = (n) =>
@@ -19,10 +20,12 @@ export function initCotizador() {
     return;
   }
 
-  const slider = $("[data-hours-input]", root);
-  const hoursValue = $("[data-hours-value]", root);
+  const slider = $("[data-calls-input]", root);
+  const numberInput = $("[data-calls-number]", root);
+  const callsValueLabel = $("[data-calls-value]", root);
   const toggle = $("[data-247-toggle]", root);
   const costHuman = $("[data-cost-human]", root);
+  const employeesLabel = $("[data-employees]", root);
   const costIa = $("[data-cost-ia]", root);
   const savingsValue = $("[data-savings-value]", root);
   const savingsAnnual = $("[data-savings-annual]", root);
@@ -35,16 +38,25 @@ export function initCotizador() {
     slider.style.setProperty("--range-progress", `${pct}%`);
   }
 
+  function clampCalls(value) {
+    const n = Number.isFinite(value) ? value : config.defaultLlamadas;
+    return Math.min(config.maxLlamadas, Math.max(config.minLlamadas, n));
+  }
+
   function render() {
-    const hours = parseFloat(slider.value);
+    const calls = parseFloat(slider.value);
     const is247 = toggle ? toggle.checked : false;
 
-    const humanCost = hours * config.costeHoraHumano * (is247 ? config.factorCobertura247 : 1);
-    const iaCost = hours * config.costeHoraIA;
+    const employees = Math.ceil(calls / config.llamadasPorEmpleado);
+    const humanCost = employees * config.costeEmpleadoMes * (is247 ? config.factorCobertura247Humano : 1);
+    const iaCostPerCall = config.costeLlamadaIA * (is247 ? config.factorCobertura247IA : 1);
+    const iaCost = calls * iaCostPerCall;
     const savings = Math.max(0, humanCost - iaCost);
     const pct = humanCost > 0 ? (savings / humanCost) * 100 : 0;
 
-    if (hoursValue) hoursValue.textContent = `${hours} h/mes`;
+    if (callsValueLabel) callsValueLabel.textContent = `${calls.toLocaleString("es-ES")} llamadas/mes`;
+    if (numberInput && document.activeElement !== numberInput) numberInput.value = calls;
+    if (employeesLabel) employeesLabel.textContent = `${employees} ${employees === 1 ? "persona" : "personas"}`;
     if (costHuman) costHuman.textContent = money(humanCost);
     if (costIa) costIa.textContent = money(iaCost);
     if (savingsValue) savingsValue.textContent = money(savings);
@@ -56,6 +68,17 @@ export function initCotizador() {
 
   slider.addEventListener("input", render);
   if (toggle) toggle.addEventListener("change", render);
+
+  if (numberInput) {
+    numberInput.addEventListener("input", () => {
+      const value = clampCalls(parseFloat(numberInput.value));
+      slider.value = value;
+      render();
+    });
+    numberInput.addEventListener("blur", () => {
+      numberInput.value = slider.value;
+    });
+  }
 
   render();
 }

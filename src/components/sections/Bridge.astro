@@ -11,31 +11,34 @@ const puntos = [
 ---
 
 <section class="section bridge">
-  <div class="container bridge-grid">
-    <div class="reveal">
-      <div class="bridge-photo">
-        <Photo src={bridgePhoto} alt="Dos manos que se acercan para conectar, representando la atención que conecta con cada cliente" />
-      </div>
+  <div class="container">
+    <div class="bridge-head reveal">
       <span class="bridge-num" aria-hidden="true">01</span>
       <h2 class="h2">Que tu negocio no vuelva a perder ni un solo cliente</h2>
-      <p class="lead" style="margin-top:1rem;">
+      <p class="lead" style="margin-top:1rem;max-width:65ch;">
         La mayoría de negocios pierde oportunidades no por falta de clientes interesados, sino
         por no poder atenderlos a tiempo, con las garantías legales que exige la ley.
       </p>
     </div>
 
-    <div class="reveal" style="transition-delay:.1s">
-      <ul class="bridge-list">
-        {puntos.map((p) => (
-          <li>
-            <Icon name="arrow-right" />
-            <div>
-              <strong>{p.title}</strong>
-              <p>{p.text}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+    <div class="bridge-grid">
+      <div class="bridge-photo reveal">
+        <Photo src={bridgePhoto} alt="Dos manos que se acercan para conectar, representando la atención que conecta con cada cliente" />
+      </div>
+
+      <div class="reveal" style="transition-delay:.1s">
+        <ul class="bridge-list">
+          {puntos.map((p) => (
+            <li>
+              <Icon name="arrow-right" />
+              <div>
+                <strong>{p.title}</strong>
+                <p>{p.text}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div>
 </section>

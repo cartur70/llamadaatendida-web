@@ -9,8 +9,8 @@ import Icon from "../ui/Icon.astro";
       <span class="eyebrow">Calcula tu ahorro</span>
       <h2 class="h2">¿Cuánto ahorrarías frente a un equipo de teleoperadores?</h2>
       <p class="lead" style="margin-top:1rem;">
-        Mueve el control con las horas de atención que necesita tu negocio al mes y compara
-        el coste de cubrirlas con personas frente a nuestro sistema híbrido de pago por uso.
+        Mueve el control con las llamadas que recibe tu negocio al mes y compara el coste
+        de atenderlas con personas frente a nuestro sistema híbrido de pago por uso.
       </p>
     </div>
 
@@ -19,23 +19,37 @@ import Icon from "../ui/Icon.astro";
         <span class="eyebrow eyebrow-sm">Simulador orientativo</span>
         <h3>Configura tu escenario</h3>
         <p style="font-size:.9rem;color:var(--ink-mute);">
-          Ajusta las horas mensuales de atención que necesita tu negocio.
+          Ajusta las llamadas mensuales que recibe tu negocio.
         </p>
 
         <div class="cotizador-field">
           <div class="cotizador-field-label">
-            <span>Horas de atención al mes</span>
-            <span data-hours-value>{COTIZADOR.defaultHoras} h/mes</span>
+            <span>Llamadas al mes</span>
+            <span data-calls-value>{COTIZADOR.defaultLlamadas.toLocaleString("es-ES")} llamadas/mes</span>
           </div>
           <input
             type="range"
-            data-hours-input
-            min={COTIZADOR.minHoras}
-            max={COTIZADOR.maxHoras}
-            step={COTIZADOR.stepHoras}
-            value={COTIZADOR.defaultHoras}
-            aria-label="Horas de atención al mes"
+            data-calls-input
+            min={COTIZADOR.minLlamadas}
+            max={COTIZADOR.maxLlamadas}
+            step={COTIZADOR.stepLlamadas}
+            value={COTIZADOR.defaultLlamadas}
+            aria-label="Llamadas al mes"
           />
+          <div class="cotizador-number-wrap">
+            <label for="cotizador-calls-number">Editar valor exacto</label>
+            <input
+              type="number"
+              id="cotizador-calls-number"
+              data-calls-number
+              min={COTIZADOR.minLlamadas}
+              max={COTIZADOR.maxLlamadas}
+              step={COTIZADOR.stepLlamadas}
+              value={COTIZADOR.defaultLlamadas}
+              class="cotizador-number-input"
+              aria-label="Llamadas al mes (valor exacto)"
+            />
+          </div>
         </div>
 
         <div class="cotizador-toggle">
@@ -51,10 +65,10 @@ import Icon from "../ui/Icon.astro";
         </div>
 
         <p class="cotizador-assumptions">
-          Estimación con fines ilustrativos, basada en un coste medio de personal totalmente
-          cargado (Seguridad Social, formación y rotación) frente a la tarifa media de pago por
-          uso del servicio híbrido. No constituye un presupuesto vinculante — solicita el tuyo
-          personalizado en el formulario de contacto.
+          Estimación con fines ilustrativos, basada en llamadas al mes, un coste medio de
+          personal totalmente cargado (Seguridad Social, formación y rotación) y la tarifa media
+          de pago por uso del servicio híbrido. No constituye un presupuesto vinculante —
+          solicita el tuyo personalizado en el formulario de contacto.
         </p>
       </div>
 
@@ -63,6 +77,7 @@ import Icon from "../ui/Icon.astro";
           <div>
             <div class="result-label">Equipo de teleoperadores</div>
             <div class="result-value" data-cost-human>—</div>
+            <div class="result-sub" data-employees>—</div>
           </div>
           <Icon name="user-check" style="width:28px;height:28px;color:var(--ink-faint);" />
         </div>
