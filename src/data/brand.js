@@ -21,10 +21,20 @@ export const BRAND = {
   ctaSecondary: "Hablar con un asesor",
 
   nav: [
-    { label: "Servicios", href: "#servicios" },
-    { label: "Cómo funciona", href: "#como-funciona" },
-    { label: "Calcula tu ahorro", href: "#cotizador" },
-    { label: "Confianza", href: "#confianza" },
+    { label: "Inicio", href: "/" },
+    {
+      label: "Soluciones",
+      href: "/soluciones/web-conversion",
+      dropdown: [
+        { label: "Web & Conversión", href: "/soluciones/web-conversion" },
+        { label: "Atención 24/7", href: "/soluciones/atencion-24-7" },
+        { label: "Legal & Protección", href: "/soluciones/legal-proteccion" },
+        { label: "Conectividad", href: "/soluciones/conectividad" },
+      ],
+    },
+    { label: "Cómo funciona", href: "/#como-funciona" },
+    { label: "Calcula tu ahorro", href: "/#cotizador" },
+    { label: "Tienda Tech", href: "#", external: true },
     { label: "Contacto", href: "/contacto" },
   ],
 

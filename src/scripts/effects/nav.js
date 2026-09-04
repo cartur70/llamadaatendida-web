@@ -33,4 +33,15 @@ export function initNav() {
     menu.classList.contains("is-open") ? closeMenu() : openMenu();
   });
   $$("[data-mobile-menu] a").forEach((a) => a.addEventListener("click", closeMenu));
+
+  // Acordeón del dropdown "Soluciones" dentro del menú hamburguesa.
+  $$("[data-mobile-dropdown]").forEach((wrap) => {
+    const toggle = $("[data-dropdown-toggle]", wrap);
+    const panel = $("[data-dropdown-panel]", wrap);
+    if (!toggle || !panel) return;
+    toggle.addEventListener("click", () => {
+      const isOpen = wrap.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
 }

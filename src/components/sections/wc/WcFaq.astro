@@ -1,0 +1,35 @@
+---
+import { WEB_CONVERSION } from "../../../data/web-conversion.js";
+import Icon from "../../ui/Icon.astro";
+
+const { faqs } = WEB_CONVERSION;
+
+// Mismo reparto equitativo en dos columnas que usa el index.
+const half = Math.ceil(faqs.length / 2);
+const faqColumns = [faqs.slice(0, half), faqs.slice(half)];
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h2 class="h2">Dudas habituales sobre diseño web y SEO</h2>
+    </div>
+
+    <div class="faq-grid reveal" style="transition-delay:.1s">
+      {faqColumns.map((column) => (
+        <div class="faq-list">
+          {column.map((f) => (
+            <details class="faq-item glass-card">
+              <summary class="faq-q">
+                {f.q}
+                <Icon name="chevron-down" />
+              </summary>
+              <div class="faq-a">{f.a}</div>
+            </details>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

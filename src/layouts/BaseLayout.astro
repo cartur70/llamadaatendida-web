@@ -5,9 +5,14 @@ import { BRAND } from "../data/brand.js";
 interface Props {
   title: string;
   description: string;
+  /** Ruta o URL absoluta de una imagen para Open Graph (opcional; por defecto no se emite og:image). */
+  ogImage?: string;
+  /** Objeto JSON-LD adicional a inyectar junto al schema.org Organization de toda la web (opcional). */
+  schema?: Record<string, unknown>;
 }
-const { title, description } = Astro.props;
+const { title, description, ogImage, schema } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, BRAND.url);
+const ogImageURL = ogImage ? new URL(ogImage, BRAND.url) : undefined;
 ---
 
 <!doctype html>
@@ -23,10 +28,13 @@ const canonicalURL = new URL(Astro.url.pathname, BRAND.url);
     <meta property="og:site_name" content={BRAND.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content="es_ES" />
-    <meta name="twitter:card" content="summary" />
+    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+    <meta name="twitter:card" content={ogImageURL ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
 
     <meta name="theme-color" content="#0b7a75" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -56,6 +64,8 @@ const canonicalURL = new URL(Astro.url.pathname, BRAND.url);
       },
       description: BRAND.description,
     })} />
+
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
     <ClientRouter />
   </head>

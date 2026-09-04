@@ -1,0 +1,21 @@
+---
+import { WEB_CONVERSION } from "../../../data/web-conversion.js";
+import Button from "../../ui/Button.astro";
+import Photo from "../../ui/Photo.astro";
+import crossImg from "../../../assets/img/cross-sell-atencion.jpg";
+
+const { crossSell } = WEB_CONVERSION;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="wc-crosssell reveal">
+      <div class="wc-crosssell-photo" aria-hidden="true">
+        <Photo src={crossImg} alt="" widths={[600, 1000, 1600]} />
+      </div>
+      <h2 class="h2">{crossSell.title}</h2>
+      <p>{crossSell.subtitle}</p>
+      <Button href={crossSell.href} variant="primary" icon="arrow-right">{crossSell.cta}</Button>
+    </div>
+  </div>
+</section>

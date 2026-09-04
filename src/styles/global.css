@@ -274,6 +274,37 @@ input, textarea, select { font: inherit; color: inherit; }
   background: var(--accent); transition: right 0.4s var(--ease-out);
 }
 .nav-link:hover::after { right: 0; }
+.nav-link.is-active { color: var(--teal-700); }
+.nav-link.is-active::after { right: 0; }
+
+/* --- Dropdown "Soluciones" (desktop: hover/focus) --- */
+.nav-dropdown { position: relative; }
+.nav-dropdown-trigger {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font: inherit; cursor: pointer;
+}
+.nav-dropdown-caret { width: 15px; height: 15px; transition: transform 0.3s var(--ease-out); }
+.nav-dropdown:hover .nav-dropdown-caret,
+.nav-dropdown:focus-within .nav-dropdown-caret { transform: rotate(180deg); }
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 0.9rem); left: 50%; transform: translate(-50%, 8px);
+  min-width: 240px; padding: 0.6rem; border-radius: var(--radius-md);
+  background: var(--paper); box-shadow: var(--shadow-lg); border: 1px solid var(--line);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), visibility 0.25s;
+  z-index: 10;
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0);
+}
+.nav-dropdown-item {
+  display: block; padding: 0.65rem 0.85rem; border-radius: var(--radius-sm);
+  font-size: 0.92rem; font-weight: 600; color: var(--ink-soft);
+  transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out);
+}
+.nav-dropdown-item:hover, .nav-dropdown-item.is-active { background: var(--teal-100); color: var(--teal-700); }
+
 .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
 .nav-burger {
   position: relative;
@@ -302,8 +333,32 @@ input, textarea, select { font: inherit; color: inherit; }
   transition: transform 0.5s var(--ease-out);
 }
 .mobile-menu.is-open { transform: translateY(0); }
-.mobile-menu a { font-family: var(--display); font-size: 1.6rem; font-weight: 700; padding-block: 0.75rem; border-bottom: 1px solid var(--line); }
+.mobile-menu > a { font-family: var(--display); font-size: 1.6rem; font-weight: 700; padding-block: 0.75rem; border-bottom: 1px solid var(--line); }
+.mobile-menu > a.is-active { color: var(--teal-700); }
 .mobile-menu .btn { margin-top: 1.5rem; }
+
+/* --- Dropdown "Soluciones": acordeón dentro del menú móvil --- */
+.mobile-dropdown { border-bottom: 1px solid var(--line); }
+.mobile-dropdown-toggle {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--display); font-size: 1.6rem; font-weight: 700; color: var(--ink);
+  padding-block: 0.75rem; text-align: left;
+}
+.mobile-dropdown-toggle.is-active { color: var(--teal-700); }
+.mobile-dropdown-caret { width: 18px; height: 18px; flex-shrink: 0; transition: transform 0.3s var(--ease-out); }
+.mobile-dropdown.is-open .mobile-dropdown-caret { transform: rotate(180deg); }
+.mobile-dropdown-panel {
+  display: grid; grid-template-rows: 0fr; overflow: hidden;
+  transition: grid-template-rows 0.35s var(--ease-out);
+}
+.mobile-dropdown.is-open .mobile-dropdown-panel { grid-template-rows: 1fr; }
+.mobile-dropdown-panel > div { min-height: 0; }
+.mobile-dropdown-panel a {
+  display: block; font-family: var(--sans); font-size: 1.05rem; font-weight: 600;
+  color: var(--ink-mute); padding: 0.6rem 0 0.6rem 1rem;
+}
+.mobile-dropdown-panel a.is-active { color: var(--teal-700); }
+.mobile-dropdown-panel a:last-child { padding-bottom: 1rem; }
 
 @media (min-width: 960px) {
   .mobile-menu { display: none; }
@@ -765,4 +820,166 @@ input[type="range"]::-moz-range-thumb {
   .hero-wave span { animation: none; height: 60%; }
   html { scroll-behavior: auto; }
   /* NO se desactivan: hover, tilt, reveal, mesh estático sigue visible, count-up, botones */
+}
+
+/* =============================================================
+   22. Página: Soluciones — Web & Conversión
+   (clases propias con prefijo wc-, aisladas del index; reutiliza
+   solo primitivas de diseño genéricas: .section, .glass-card, .btn,
+   .eyebrow, .h1-3, .lead, .field, .faq-*, .icon-tile…)
+   ============================================================= */
+
+/* --- Hero: mockup de dispositivos + chips flotantes --- */
+.wc-device-mockup { position: relative; width: 100%; max-width: 480px; margin-inline: auto; animation: floatY 8s ease-in-out infinite; }
+.wc-device-mockup svg { width: 100%; height: auto; filter: drop-shadow(0 30px 60px rgba(6, 61, 58, 0.18)); }
+.wc-float-chip {
+  position: absolute; display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 0.85rem; border-radius: var(--radius-pill);
+  font-family: var(--display); font-weight: 700; font-size: 0.76rem; color: var(--teal-800);
+  animation: floatY 7s ease-in-out infinite;
+}
+.wc-float-chip svg { width: 14px; height: 14px; color: var(--amber-600); flex-shrink: 0; }
+.wc-float-chip.c1 { top: 6%; left: -4%; animation-delay: -1.5s; }
+.wc-float-chip.c2 { top: 46%; right: -6%; animation-delay: -3.5s; }
+.wc-float-chip.c3 { bottom: 8%; left: 4%; animation-delay: -5.5s; }
+
+/* --- Funnel: Atraemos → Convertimos → Conectamos → Vendemos --- */
+.wc-funnel {
+  background: linear-gradient(180deg, var(--teal-900), var(--teal-800));
+  border-radius: var(--radius-lg); color: var(--teal-100);
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+}
+.wc-funnel .section-head .eyebrow { color: var(--amber-400); }
+.wc-funnel .section-head .eyebrow::before { background: var(--amber-400); }
+.wc-funnel .section-head h2, .wc-funnel .section-head .lead { color: #fff; }
+.wc-funnel .section-head .lead { color: rgba(255,255,255,0.72); }
+
+.wc-funnel-grid { display: grid; gap: 2.5rem; margin-top: 1rem; }
+@media (min-width: 1080px) { .wc-funnel-grid { grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: center; } }
+
+.wc-funnel-steps { display: grid; gap: 0.75rem; align-items: stretch; }
+@media (min-width: 720px) { .wc-funnel-steps { grid-template-columns: repeat(4, 1fr); } }
+.wc-funnel-step {
+  position: relative; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-md); padding: 1.5rem 1.25rem; text-align: center;
+}
+.wc-funnel-step-icon {
+  width: 48px; height: 48px; margin-inline: auto 0; margin: 0 auto 1rem;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: rgba(245,166,35,0.16);
+}
+.wc-funnel-step-icon svg { width: 22px; height: 22px; color: var(--amber-400); }
+.wc-funnel-step strong { display: block; font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.03em; color: #fff; margin-bottom: 0.3rem; }
+.wc-funnel-step span { font-size: 0.82rem; color: rgba(255,255,255,0.68); }
+.wc-funnel-arrow {
+  display: none; position: absolute; top: 50%; right: -0.65rem; transform: translateY(-50%);
+  width: 18px; height: 18px; color: var(--amber-400); z-index: 1;
+}
+@media (min-width: 720px) {
+  .wc-funnel-step:not(:last-child) .wc-funnel-arrow { display: block; }
+}
+
+.wc-funnel-stats { display: flex; flex-direction: column; gap: 0.75rem; }
+.wc-funnel-stat {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-md); padding: 1rem 1.25rem;
+}
+.wc-funnel-stat b { font-family: var(--display); font-size: 1.4rem; color: var(--amber-400); }
+.wc-funnel-stat span { font-size: 0.82rem; color: rgba(255,255,255,0.72); }
+.wc-funnel-chart { margin-top: 0.25rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-md); padding: 1rem 1.25rem 0.5rem; }
+.wc-funnel-chart svg { width: 100%; height: auto; display: block; }
+
+/* --- Grid de 4 servicios --- */
+.wc-servicios-grid { display: grid; gap: 1.5rem; }
+@media (min-width: 620px) { .wc-servicios-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .wc-servicios-grid { grid-template-columns: repeat(4, 1fr); } }
+.wc-service-card {
+  padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 1rem;
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
+}
+.wc-service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.wc-service-card .icon-tile { background: var(--teal-100); color: var(--teal-700); }
+.wc-service-card h3 { font-size: 1.05rem; }
+.wc-service-card p { font-size: 0.9rem; color: var(--ink-mute); }
+
+/* --- Proceso con flechas + banner de confianza --- */
+.wc-proceso-grid { display: grid; gap: 1.5rem; position: relative; }
+@media (min-width: 720px) { .wc-proceso-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .wc-proceso-grid { grid-template-columns: repeat(4, 1fr); } }
+.wc-proceso-card { position: relative; padding: 1.75rem; }
+.wc-proceso-circle {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--teal-700); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-weight: 800; font-size: 1.05rem; margin-bottom: 1.1rem;
+}
+.wc-proceso-card h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+.wc-proceso-card p { font-size: 0.88rem; color: var(--ink-mute); }
+.wc-proceso-arrow {
+  display: none; position: absolute; top: 1.9rem; right: -1.4rem; width: 22px; height: 22px; color: var(--teal-300); z-index: 1;
+}
+@media (min-width: 720px) {
+  .wc-proceso-card:nth-child(2n):not(:last-child) .wc-proceso-arrow { display: none; }
+}
+@media (min-width: 1080px) {
+  .wc-proceso-card:not(:last-child) .wc-proceso-arrow { display: block; }
+}
+
+.wc-proceso-banner {
+  margin-top: 2rem; border-radius: var(--radius-md); background: var(--ink);
+  padding: 1.5rem 1.75rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem;
+}
+.wc-proceso-banner p { color: #fff; font-size: 0.98rem; font-weight: 600; max-width: 46ch; }
+
+/* --- ¿Por qué tu web no vende? --- */
+.wc-problema-grid { display: grid; gap: 2.5rem; align-items: stretch; }
+@media (min-width: 900px) { .wc-problema-grid { grid-template-columns: 1.05fr 0.95fr; gap: 3rem; } }
+.wc-problema-list { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
+.wc-problema-list li { display: flex; gap: 0.85rem; align-items: center; padding: 1rem 1.1rem; border-radius: var(--radius-md); background: rgba(11,33,31,0.04); }
+.wc-problema-list svg { width: 22px; height: 22px; color: var(--amber-600); flex-shrink: 0; }
+.wc-problema-list p { font-weight: 600; color: var(--ink-soft); font-size: 0.95rem; }
+.wc-problema-photo { border-radius: var(--radius-lg); overflow: clip; box-shadow: var(--shadow-md); aspect-ratio: 4/3; }
+@media (min-width: 900px) { .wc-problema-photo { aspect-ratio: auto; min-height: 100%; } }
+.wc-problema-photo img { width: 100%; height: 100%; object-fit: cover; }
+.wc-problema-shift { margin-top: 2rem; text-align: center; }
+.wc-problema-shift strong { display: block; font-family: var(--display); font-size: 1.3rem; color: var(--teal-700); margin-bottom: 1rem; }
+
+/* --- Cross-sell banner hacia Atención 24/7 --- */
+.wc-crosssell {
+  position: relative; overflow: clip; border-radius: var(--radius-lg); text-align: center;
+  padding: clamp(3rem, 7vw, 4.5rem) clamp(1.75rem, 5vw, 4rem);
+  background: linear-gradient(135deg, var(--teal-800), var(--teal-600));
+}
+.wc-crosssell-photo { position: absolute; inset: 0; z-index: 0; }
+.wc-crosssell-photo img { width: 100%; height: 100%; object-fit: cover; opacity: 0.25; mix-blend-mode: luminosity; }
+.wc-crosssell-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,90,85,0.88), rgba(23,169,158,0.7)); }
+.wc-crosssell > *:not(.wc-crosssell-photo) { position: relative; z-index: 1; }
+.wc-crosssell h2 { color: #fff; max-width: 24ch; margin-inline: auto; }
+.wc-crosssell p { color: rgba(255,255,255,0.8); max-width: 52ch; margin-inline: auto; margin-top: 0.85rem; }
+.wc-crosssell .btn { margin-top: 1.75rem; }
+
+/* --- Mini-caso de éxito --- */
+.wc-caso { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; padding: 2.25rem clamp(1.5rem, 4vw, 2.5rem); }
+.wc-caso-stat { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 5vw, 3rem); color: var(--teal-700); line-height: 1; flex-shrink: 0; }
+.wc-caso-text { max-width: 46ch; }
+.wc-caso-text strong { display: block; font-family: var(--display); font-size: 1.05rem; color: var(--ink); margin-bottom: 0.3rem; }
+.wc-caso-text p { color: var(--ink-mute); font-size: 0.92rem; }
+
+/* --- CTA final con formulario de auditoría --- */
+.wc-cta-final {
+  border-radius: var(--radius-lg); text-align: center; position: relative; overflow: clip;
+  padding: clamp(3rem, 7vw, 4.5rem) clamp(1.5rem, 5vw, 3rem);
+  background: linear-gradient(135deg, var(--amber-500), var(--amber-600));
+}
+.wc-cta-final h2 { color: var(--accent-ink); max-width: 26ch; margin-inline: auto; }
+.wc-cta-final .lead { color: rgba(74,46,2,0.82); max-width: 50ch; margin-inline: auto; margin-top: 0.85rem; }
+.wc-cta-form {
+  max-width: 640px; margin: 2.25rem auto 0; text-align: left;
+  background: var(--paper); border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.25rem);
+  box-shadow: var(--shadow-lg);
+}
+
+/* --- Reduced motion: extender la excepción a los nuevos elementos animados --- */
+@media (prefers-reduced-motion: reduce) {
+  .wc-device-mockup, .wc-float-chip { animation: none; }
 }

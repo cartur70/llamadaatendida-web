@@ -4,6 +4,10 @@ import Icon from "../ui/Icon.astro";
 import Button from "../ui/Button.astro";
 import logo from "../../assets/img/logo.webp";
 import { Image } from "astro:assets";
+
+const path = Astro.url.pathname;
+const isActive = (href) => href !== "#" && (path === href || (href !== "/" && path.startsWith(href)));
+const isDropdownActive = (item) => item.dropdown?.some((child) => isActive(child.href));
 ---
 
 <header class="nav" data-nav>
@@ -13,9 +17,36 @@ import { Image } from "astro:assets";
     </a>
 
     <nav class="nav-links" aria-label="Navegación principal">
-      {BRAND.nav.map((item) => (
-        <a href={item.href} class="nav-link">{item.label}</a>
-      ))}
+      {BRAND.nav.map((item) =>
+        item.dropdown ? (
+          <div class="nav-dropdown">
+            <button
+              class:list={["nav-link", "nav-dropdown-trigger", { "is-active": isDropdownActive(item) }]}
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {item.label}
+              <Icon name="chevron-down" class="nav-dropdown-caret" />
+            </button>
+            <div class="nav-dropdown-menu">
+              {item.dropdown.map((child) => (
+                <a href={child.href} class:list={["nav-dropdown-item", { "is-active": isActive(child.href) }]}>
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a
+            href={item.href}
+            class:list={["nav-link", { "is-active": isActive(item.href) }]}
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener" : undefined}
+          >
+            {item.label}
+          </a>
+        )
+      )}
     </nav>
 
     <div class="nav-actions">
@@ -31,9 +62,36 @@ import { Image } from "astro:assets";
 </header>
 
 <div class="mobile-menu" data-mobile-menu>
-  {BRAND.nav.map((item) => (
-    <a href={item.href}>{item.label}</a>
-  ))}
+  {BRAND.nav.map((item) =>
+    item.dropdown ? (
+      <div class="mobile-dropdown" data-mobile-dropdown>
+        <button
+          class:list={["mobile-dropdown-toggle", { "is-active": isDropdownActive(item) }]}
+          data-dropdown-toggle
+          aria-expanded="false"
+        >
+          {item.label}
+          <Icon name="chevron-down" class="mobile-dropdown-caret" />
+        </button>
+        <div class="mobile-dropdown-panel" data-dropdown-panel>
+          <div>
+            {item.dropdown.map((child) => (
+              <a href={child.href} class:list={{ "is-active": isActive(child.href) }}>{child.label}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    ) : (
+      <a
+        href={item.href}
+        class:list={{ "is-active": isActive(item.href) }}
+        target={item.external ? "_blank" : undefined}
+        rel={item.external ? "noopener" : undefined}
+      >
+        {item.label}
+      </a>
+    )
+  )}
   <Button href="/contacto" variant="primary">{BRAND.ctaPrimary}</Button>
 </div>
 

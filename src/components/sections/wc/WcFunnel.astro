@@ -1,0 +1,51 @@
+---
+import { WEB_CONVERSION } from "../../../data/web-conversion.js";
+import Icon from "../../ui/Icon.astro";
+
+const { funnel, funnelStats } = WEB_CONVERSION;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="wc-funnel reveal">
+      <div class="section-head center">
+        <span class="eyebrow">De visitas a clientes</span>
+        <h2 class="h2">Ese es el objetivo</h2>
+        <p class="lead" style="margin-top:1rem;">
+          Un embudo de captación diseñado para que cada visita tenga una razón para quedarse
+          y una forma sencilla de convertirse en cliente.
+        </p>
+      </div>
+
+      <div class="wc-funnel-grid">
+        <div class="wc-funnel-steps stagger">
+          {funnel.map((f) => (
+            <div class="wc-funnel-step">
+              <div class="wc-funnel-step-icon"><Icon name={f.icon} /></div>
+              <strong>{f.step}</strong>
+              <span>{f.text}</span>
+              <Icon name="arrow-right" class="wc-funnel-arrow" />
+            </div>
+          ))}
+        </div>
+
+        <div class="wc-funnel-stats">
+          {funnelStats.map((s) => (
+            <div class="wc-funnel-stat">
+              <span>{s.label}</span>
+              <b>{s.value}</b>
+            </div>
+          ))}
+          <div class="wc-funnel-chart" aria-hidden="true">
+            <svg viewBox="0 0 220 90" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="52" width="30" height="30" rx="4" style="fill:var(--teal-500)" opacity="0.55" />
+              <rect x="60" y="38" width="30" height="44" rx="4" style="fill:var(--teal-500)" opacity="0.7" />
+              <rect x="110" y="22" width="30" height="60" rx="4" style="fill:var(--teal-500)" opacity="0.85" />
+              <rect x="160" y="6" width="30" height="76" rx="4" style="fill:var(--amber-400)" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

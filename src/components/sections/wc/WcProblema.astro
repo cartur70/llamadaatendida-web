@@ -1,0 +1,38 @@
+---
+import { WEB_CONVERSION } from "../../../data/web-conversion.js";
+import Icon from "../../ui/Icon.astro";
+import Photo from "../../ui/Photo.astro";
+import problemaImg from "../../../assets/img/web-lenta-problema.jpg";
+
+const { problemas } = WEB_CONVERSION;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Diagnóstico</span>
+      <h2 class="h2">¿Por qué tu web actual no vende?</h2>
+    </div>
+
+    <div class="wc-problema-grid">
+      <div class="reveal">
+        <ul class="wc-problema-list">
+          {problemas.map((p) => (
+            <li>
+              <Icon name="x-circle" />
+              <p>{p}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="wc-problema-photo reveal" style="transition-delay:.1s">
+        <Photo src={problemaImg} alt="Persona intentando navegar por una web desde el portátil, con la carga lenta como principal obstáculo" />
+      </div>
+    </div>
+
+    <div class="wc-problema-shift reveal">
+      <strong>Eso cambia hoy.</strong>
+    </div>
+  </div>
+</section>

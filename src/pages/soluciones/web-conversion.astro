@@ -1,0 +1,63 @@
+---
+import { getImage } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/layout/Nav.astro";
+import Footer from "../../components/layout/Footer.astro";
+import WcHero from "../../components/sections/wc/WcHero.astro";
+import WcFunnel from "../../components/sections/wc/WcFunnel.astro";
+import WcServicios from "../../components/sections/wc/WcServicios.astro";
+import WcProceso from "../../components/sections/wc/WcProceso.astro";
+import WcProblema from "../../components/sections/wc/WcProblema.astro";
+import WcCrossSell from "../../components/sections/wc/WcCrossSell.astro";
+import WcCasoExito from "../../components/sections/wc/WcCasoExito.astro";
+import WcFaq from "../../components/sections/wc/WcFaq.astro";
+import WcCtaFinal from "../../components/sections/wc/WcCtaFinal.astro";
+import { BRAND } from "../../data/brand.js";
+import { WEB_CONVERSION } from "../../data/web-conversion.js";
+import ogSourceImage from "../../assets/img/web-lenta-problema.jpg";
+
+const ogImageResult = await getImage({ src: ogSourceImage, format: "jpg", width: 1200, height: 630 });
+// Nota: se usa el dominio real de la marca (BRAND.url), igual que en el resto del
+// sitio, en lugar del dominio de staging de Cloudflare Pages indicado en el brief,
+// para que el canonical/OG no apunte a un dominio distinto al de las demás páginas.
+const pageURL = new URL("/soluciones/web-conversion", BRAND.url).toString();
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Diseño web y optimización SEO",
+  name: "Diseño Web y Conversión",
+  description: WEB_CONVERSION.seo.description,
+  provider: {
+    "@type": "Organization",
+    name: BRAND.legalName,
+    url: BRAND.url,
+    telephone: BRAND.contact.phone,
+  },
+  areaServed: "ES",
+  url: pageURL,
+};
+---
+
+<BaseLayout title={WEB_CONVERSION.seo.title} description={WEB_CONVERSION.seo.description} ogImage={ogImageResult.src} schema={serviceSchema}>
+  <Nav />
+  <main id="main">
+    <WcHero />
+    <WcFunnel />
+    <WcServicios />
+    <WcProceso />
+    <WcProblema />
+    <WcCrossSell />
+    <WcCasoExito />
+    <WcFaq />
+    <WcCtaFinal />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { safe, onReady } from "../../scripts/utils.js";
+  import { initReveal } from "../../scripts/effects/reveal.js";
+
+  onReady(() => safe(initReveal, "initReveal"));
+</script>

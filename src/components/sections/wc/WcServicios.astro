@@ -1,0 +1,25 @@
+---
+import { WEB_CONVERSION } from "../../../data/web-conversion.js";
+import Icon from "../../ui/Icon.astro";
+
+const { servicios } = WEB_CONVERSION;
+---
+
+<section class="section" id="servicios-web">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Qué incluye</span>
+      <h2 class="h2">Todo lo que necesita tu web para vender</h2>
+    </div>
+
+    <div class="wc-servicios-grid stagger">
+      {servicios.map((s) => (
+        <article class="glass-card wc-service-card">
+          <div class="icon-tile"><Icon name={s.icon} /></div>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

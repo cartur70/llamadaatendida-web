@@ -1,0 +1,18 @@
+---
+import { WEB_CONVERSION } from "../../../data/web-conversion.js";
+
+const { casoExito } = WEB_CONVERSION;
+---
+
+<section class="section" style="padding-block: clamp(2rem, 4vw, 3rem);">
+  <div class="container">
+    <div class="wc-caso glass-card reveal">
+      <div class="wc-caso-stat">{casoExito.stat}</div>
+      <div class="wc-caso-text">
+        <span class="eyebrow eyebrow-sm">{casoExito.kicker}</span>
+        <strong>{casoExito.empresa}</strong>
+        <p>{casoExito.statLabel}</p>
+      </div>
+    </div>
+  </div>
+</section>

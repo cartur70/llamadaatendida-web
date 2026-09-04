@@ -1,0 +1,37 @@
+---
+import { WEB_CONVERSION } from "../../../data/web-conversion.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+
+const { proceso, procesoBanner } = WEB_CONVERSION;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2 class="h2">De la auditoría al crecimiento continuo</h2>
+    </div>
+
+    <div class="wc-proceso-grid stagger">
+      {proceso.map((p) => (
+        <div class="wc-proceso-card glass-card">
+          <div class="wc-proceso-circle">{p.n}</div>
+          <h3 style="display:flex;align-items:center;gap:.5rem;">
+            <Icon name={p.icon} style="width:17px;height:17px;color:var(--teal-600);flex-shrink:0;" />
+            {p.title}
+          </h3>
+          <p>{p.text}</p>
+          <Icon name="arrow-right" class="wc-proceso-arrow" />
+        </div>
+      ))}
+    </div>
+
+    <div class="wc-proceso-banner reveal">
+      <p>{procesoBanner}</p>
+      <Button href="#auditoria" variant="primary" size="sm" icon="arrow-right">
+        Solicitar auditoría gratis de mi negocio
+      </Button>
+    </div>
+  </div>
+</section>
