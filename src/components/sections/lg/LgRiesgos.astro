@@ -1,0 +1,49 @@
+---
+import { LEGAL_PROTECCION } from "../../../data/legal-proteccion.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+
+const { riesgos } = LEGAL_PROTECCION;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="lg-riesgos-section reveal">
+      <div class="section-head center">
+        <span class="eyebrow">Diagnóstico de riesgo</span>
+        <h2 class="h2">{riesgos.title}</h2>
+      </div>
+
+      <div class="lg-riesgos-layout">
+        <ul class="lg-riesgos-list stagger">
+          {riesgos.items.map((r) => (
+            <li>
+              <Icon name="alert-triangle" />
+              <p>{r}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div class="lg-riesgos-visual" aria-hidden="true">
+          <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M120 12 L214 46 V138 C214 204 168 240 120 262 C72 240 26 204 26 138 V46 Z"
+              fill="var(--teal-100)" stroke="var(--teal-700)" stroke-width="4" stroke-linejoin="round"
+            />
+            <path d="M88 138l24 24 44-54" fill="none" stroke="var(--teal-700)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+            <g stroke="var(--amber-500)" stroke-width="4" stroke-linecap="round" opacity="0.85">
+              <path d="M46 60l-16-10" />
+              <path d="M40 82h-18" />
+              <path d="M46 104l-16 10" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="lg-riesgos-transicion reveal">
+        <strong>{riesgos.transicion}</strong>
+        <Button href="#auditoria" variant="primary" icon="arrow-right">Solicitar auditoría legal gratuita</Button>
+      </div>
+    </div>
+  </div>
+</section>

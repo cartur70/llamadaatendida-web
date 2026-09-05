@@ -1,0 +1,97 @@
+---
+import { ATENCION_247 } from "../../../data/atencion-24-7.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+import Photo from "../../ui/Photo.astro";
+import heroPhoto from "../../../assets/img/mujer-call-center.jpg";
+
+const { hero } = ATENCION_247;
+---
+
+<section class="hero">
+  <div class="hero-mesh" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">{hero.eyebrow}</span>
+        <h1 class="h1 hero-title">{hero.title}</h1>
+        <p class="lead hero-sub">{hero.subtitle}</p>
+
+        <div class="hero-actions">
+          <Button href="#demo" variant="primary" icon="arrow-right">Solicitar demo gratuita</Button>
+          <Button href="#cotizador" variant="ghost">Calcular mi ahorro</Button>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" style="transition-delay:.15s">
+        <div class="hero-photo-frame">
+          <Photo
+            src={heroPhoto}
+            alt="Agente de atención al cliente sonriendo mientras atiende una llamada"
+            eager
+            quality={85}
+            widths={[400, 800, 1200]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+
+        <div class="atn-hero-pill glass-card">
+          <div class="icon-tile"><Icon name="exchange" /></div>
+          <div>
+            <strong>Sistema híbrido IA + Humanos</strong>
+            <span>La combinación perfecta</span>
+          </div>
+        </div>
+
+        <div class="atn-badge ia glass-card">
+          <div class="icon-tile"><Icon name="bot" /></div>
+          <div>
+            <strong>Agentes IA</strong>
+            <span>Rapidez y disponibilidad 24/7</span>
+          </div>
+        </div>
+
+        <div class="atn-badge humanos glass-card">
+          <div class="icon-tile"><Icon name="user" /></div>
+          <div>
+            <strong>Agentes humanos</strong>
+            <span>Empatía en casos complejos</span>
+          </div>
+        </div>
+
+        <div class="atn-plus glass-card" aria-hidden="true">+</div>
+      </div>
+
+      <div class="atn-mobile-info">
+        <div class="atn-mobile-info-item glass-card">
+          <div class="icon-tile"><Icon name="bot" /></div>
+          <div>
+            <strong>Agentes IA</strong>
+            <span>Rapidez y disponibilidad 24/7</span>
+          </div>
+        </div>
+        <div class="atn-mobile-info-item glass-card">
+          <div class="icon-tile"><Icon name="user" /></div>
+          <div>
+            <strong>Agentes humanos</strong>
+            <span>Empatía en casos complejos</span>
+          </div>
+        </div>
+        <div class="atn-mobile-info-item glass-card">
+          <div class="icon-tile"><Icon name="exchange" /></div>
+          <div>
+            <strong>Sistema híbrido IA + Humanos</strong>
+            <span>La combinación perfecta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { safe, onReady } from "../../../scripts/utils.js";
+  import { initMagnetic } from "../../../scripts/effects/magnetic.js";
+
+  onReady(() => safe(initMagnetic, "initMagnetic"));
+</script>

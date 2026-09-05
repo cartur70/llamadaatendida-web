@@ -1,0 +1,28 @@
+---
+import { ATENCION_247 } from "../../../data/atencion-24-7.js";
+import Icon from "../../ui/Icon.astro";
+
+const { flujo, flujoCierre } = ATENCION_247;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Así funciona</span>
+      <h2 class="h2">De la primera llamada al resultado</h2>
+    </div>
+
+    <div class="atn-flujo-grid stagger">
+      {flujo.map((f) => (
+        <div class="atn-flujo-step glass-card">
+          <div class="atn-flujo-circle"><Icon name={f.icon} /></div>
+          <h3>{f.title}</h3>
+          <p>{f.text}</p>
+          <Icon name="arrow-right" class="atn-flujo-arrow" />
+        </div>
+      ))}
+    </div>
+
+    <p class="atn-flujo-cierre reveal">{flujoCierre}</p>
+  </div>
+</section>

@@ -29,11 +29,13 @@ const isDropdownActive = (item) => item.dropdown?.some((child) => isActive(child
               <Icon name="chevron-down" class="nav-dropdown-caret" />
             </button>
             <div class="nav-dropdown-menu">
-              {item.dropdown.map((child) => (
-                <a href={child.href} class:list={["nav-dropdown-item", { "is-active": isActive(child.href) }]}>
-                  {child.label}
-                </a>
-              ))}
+              <div class="nav-dropdown-menu-inner">
+                {item.dropdown.map((child) => (
+                  <a href={child.href} class:list={["nav-dropdown-item", { "is-active": isActive(child.href) }]}>
+                    {child.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         ) : (

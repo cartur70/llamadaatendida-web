@@ -1,0 +1,16 @@
+---
+import { LEGAL_PROTECCION } from "../../../data/legal-proteccion.js";
+import Button from "../../ui/Button.astro";
+
+const { crossSell } = LEGAL_PROTECCION;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="lg-crosssell reveal">
+      <h2 class="h2">{crossSell.title}</h2>
+      <p>{crossSell.subtitle}</p>
+      <Button href={crossSell.href} variant="primary" icon="wifi">{crossSell.cta}</Button>
+    </div>
+  </div>
+</section>

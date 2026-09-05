@@ -1,0 +1,61 @@
+---
+import { getImage } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/layout/Nav.astro";
+import Footer from "../../components/layout/Footer.astro";
+import LgHero from "../../components/sections/lg/LgHero.astro";
+import LgProtecciones from "../../components/sections/lg/LgProtecciones.astro";
+import LgRiesgos from "../../components/sections/lg/LgRiesgos.astro";
+import LgProceso from "../../components/sections/lg/LgProceso.astro";
+import LgComparativa from "../../components/sections/lg/LgComparativa.astro";
+import LgCrossSell from "../../components/sections/lg/LgCrossSell.astro";
+import LgFaq from "../../components/sections/lg/LgFaq.astro";
+import LgCtaFinal from "../../components/sections/lg/LgCtaFinal.astro";
+import { BRAND } from "../../data/brand.js";
+import { LEGAL_PROTECCION } from "../../data/legal-proteccion.js";
+import ogSourceImage from "../../assets/img/rgpd-cumplimiento-legal.jpg";
+
+const ogImageResult = await getImage({ src: ogSourceImage, format: "jpg", width: 1200, height: 630 });
+// Mismo criterio que en las páginas anteriores de /soluciones/: dominio real
+// de la marca (BRAND.url) en vez del dominio de staging de Cloudflare Pages
+// del brief, para mantener canonical/OG consistentes con el resto del sitio.
+const pageURL = new URL("/soluciones/legal-proteccion", BRAND.url).toString();
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Protección legal, cumplimiento RGPD y seguro de responsabilidad civil",
+  name: "Protección Legal y RGPD",
+  description: LEGAL_PROTECCION.seo.description,
+  provider: {
+    "@type": "Organization",
+    name: BRAND.legalName,
+    url: BRAND.url,
+    telephone: BRAND.contact.phone,
+  },
+  areaServed: "ES",
+  url: pageURL,
+};
+---
+
+<BaseLayout title={LEGAL_PROTECCION.seo.title} description={LEGAL_PROTECCION.seo.description} ogImage={ogImageResult.src} schema={serviceSchema}>
+  <Nav />
+  <main id="main">
+    <LgHero />
+    <LgProtecciones />
+    <LgRiesgos />
+    <LgProceso />
+    <LgComparativa />
+    <LgCrossSell />
+    <LgFaq />
+    <LgCtaFinal />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { safe, onReady } from "../../scripts/utils.js";
+  import { initReveal } from "../../scripts/effects/reveal.js";
+
+  onReady(() => safe(initReveal, "initReveal"));
+</script>

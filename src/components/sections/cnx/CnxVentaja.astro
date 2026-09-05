@@ -1,0 +1,52 @@
+---
+import { CONECTIVIDAD } from "../../../data/conectividad.js";
+import Icon from "../../ui/Icon.astro";
+
+const { ventaja } = CONECTIVIDAD;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="cnx-ventaja-section reveal">
+      <div class="cnx-ventaja-layout">
+        <div>
+          <span class="eyebrow">Infraestructura propia</span>
+          <h2 class="h2">{ventaja.title}</h2>
+          <ul class="cnx-ventaja-list stagger">
+            {ventaja.items.map((i) => (
+              <li><Icon name="check" />{i}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="cnx-ventaja-visual" aria-hidden="true">
+          <svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="var(--teal-300)" stroke-width="2" fill="none">
+              <line x1="60" y1="60" x2="160" y2="130" />
+              <line x1="160" y1="130" x2="260" y2="50" />
+              <line x1="160" y1="130" x2="90" y2="205" />
+              <line x1="160" y1="130" x2="240" y2="205" />
+              <line x1="60" y1="60" x2="90" y2="205" />
+              <line x1="260" y1="50" x2="240" y2="205" />
+            </g>
+            <circle cx="60" cy="60" r="10" fill="var(--teal-600)" />
+            <circle cx="260" cy="50" r="10" fill="var(--teal-600)" />
+            <circle cx="90" cy="205" r="10" fill="var(--teal-600)" />
+            <circle cx="240" cy="205" r="10" fill="var(--teal-600)" />
+            <circle cx="160" cy="130" r="26" fill="none" stroke="var(--amber-400)" stroke-width="2" opacity="0.5" />
+            <circle cx="160" cy="130" r="16" fill="var(--amber-500)" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="cnx-ventaja-stats">
+        {ventaja.stats.map((s) => (
+          <div class="cnx-ventaja-stat">
+            <b>{s.value}</b>
+            <span>{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

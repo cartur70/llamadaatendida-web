@@ -1,0 +1,71 @@
+---
+import { LEGAL_PROTECCION } from "../../../data/legal-proteccion.js";
+import Button from "../../ui/Button.astro";
+
+const { ctaFinal } = LEGAL_PROTECCION;
+---
+
+<section class="section" id="auditoria">
+  <div class="container">
+    <div class="lg-cta-final reveal">
+      <span class="eyebrow" style="color:var(--accent-ink);opacity:.75;">Auditoría gratuita</span>
+      <h2 class="h2">{ctaFinal.title}</h2>
+      <p class="lead">{ctaFinal.subtitle}</p>
+
+      <form class="lg-cta-form" data-contact-form novalidate>
+        <div class="form-grid two">
+          <div class="field">
+            <label for="lg-nombre">Nombre y apellidos *</label>
+            <input id="lg-nombre" name="nombre" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="lg-negocio">Nombre del negocio *</label>
+            <input id="lg-negocio" name="negocio" type="text" required autocomplete="organization" />
+          </div>
+        </div>
+
+        <div class="form-grid two" style="margin-top:1.1rem;">
+          <div class="field">
+            <label for="lg-email">Email *</label>
+            <input id="lg-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="lg-telefono">Teléfono</label>
+            <input id="lg-telefono" name="telefono" type="tel" autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:1.1rem;">
+          <label for="lg-url">URL de tu web (opcional)</label>
+          <input id="lg-url" name="url" type="text" placeholder="tuweb.com" />
+        </div>
+
+        <div class="field" style="margin-top:1.1rem;">
+          <label for="lg-mensaje">Cuéntanos qué te preocupa a nivel legal</label>
+          <textarea id="lg-mensaje" name="mensaje"></textarea>
+        </div>
+
+        <div class="field-check" style="margin-top:1.2rem;">
+          <input id="lg-rgpd" name="rgpd" type="checkbox" required />
+          <label for="lg-rgpd">
+            He leído y acepto la <a href="/politica-privacidad">política de privacidad</a>.
+            Tus datos se tratan conforme al RGPD únicamente para responder a tu solicitud.
+          </label>
+        </div>
+
+        <div class="form-status" data-form-status role="status"></div>
+
+        <Button type="submit" variant="primary" class="btn-block" noMagnetic style="margin-top:1.4rem;" data-form-submit>
+          {ctaFinal.cta}
+        </Button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { safe, onReady } from "../../../scripts/utils.js";
+  import { initContactForm } from "../../../scripts/effects/contact-form.js";
+
+  onReady(() => safe(initContactForm, "initContactForm"));
+</script>

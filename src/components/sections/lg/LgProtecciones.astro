@@ -1,0 +1,33 @@
+---
+import { LEGAL_PROTECCION } from "../../../data/legal-proteccion.js";
+import Icon from "../../ui/Icon.astro";
+import Photo from "../../ui/Photo.astro";
+import protImg from "../../../assets/img/confianza-documentacion.jpg";
+
+const { protecciones } = LEGAL_PROTECCION;
+---
+
+<section class="section" id="protecciones">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Cobertura completa</span>
+      <h2 class="h2">Cuatro protecciones, un mismo servicio</h2>
+    </div>
+
+    <div class="lg-protecciones-layout">
+      <div class="lg-protecciones-photo reveal">
+        <Photo src={protImg} alt="Manos rellenando un documento, representando el blindaje legal del negocio" widths={[400, 700, 1000]} />
+      </div>
+
+      <div class="lg-protecciones-grid stagger">
+        {protecciones.map((p) => (
+          <article class="glass-card lg-proteccion-card">
+            <div class="icon-tile"><Icon name={p.icon} /></div>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

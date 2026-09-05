@@ -1,0 +1,61 @@
+---
+import { getImage } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/layout/Nav.astro";
+import Footer from "../../components/layout/Footer.astro";
+import CnxHero from "../../components/sections/cnx/CnxHero.astro";
+import CnxServicios from "../../components/sections/cnx/CnxServicios.astro";
+import CnxVentaja from "../../components/sections/cnx/CnxVentaja.astro";
+import CnxProceso from "../../components/sections/cnx/CnxProceso.astro";
+import CnxComparativa from "../../components/sections/cnx/CnxComparativa.astro";
+import CnxCrossSell from "../../components/sections/cnx/CnxCrossSell.astro";
+import CnxFaq from "../../components/sections/cnx/CnxFaq.astro";
+import CnxCtaFinal from "../../components/sections/cnx/CnxCtaFinal.astro";
+import { BRAND } from "../../data/brand.js";
+import { CONECTIVIDAD } from "../../data/conectividad.js";
+import ogSourceImage from "../../assets/img/telecomunicaciones-fibra.jpg";
+
+const ogImageResult = await getImage({ src: ogSourceImage, format: "jpg", width: 1200, height: 630 });
+// Mismo criterio que en las páginas anteriores de /soluciones/: dominio real
+// de la marca (BRAND.url) en vez del dominio de staging de Cloudflare Pages
+// del brief, para mantener canonical/OG consistentes con el resto del sitio.
+const pageURL = new URL("/soluciones/conectividad", BRAND.url).toString();
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Conectividad y telecomunicaciones para empresas",
+  name: "Conectividad y Telecomunicaciones",
+  description: CONECTIVIDAD.seo.description,
+  provider: {
+    "@type": "Organization",
+    name: BRAND.legalName,
+    url: BRAND.url,
+    telephone: BRAND.contact.phone,
+  },
+  areaServed: "ES",
+  url: pageURL,
+};
+---
+
+<BaseLayout title={CONECTIVIDAD.seo.title} description={CONECTIVIDAD.seo.description} ogImage={ogImageResult.src} schema={serviceSchema}>
+  <Nav />
+  <main id="main">
+    <CnxHero />
+    <CnxServicios />
+    <CnxVentaja />
+    <CnxProceso />
+    <CnxComparativa />
+    <CnxCrossSell />
+    <CnxFaq />
+    <CnxCtaFinal />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { safe, onReady } from "../../scripts/utils.js";
+  import { initReveal } from "../../scripts/effects/reveal.js";
+
+  onReady(() => safe(initReveal, "initReveal"));
+</script>

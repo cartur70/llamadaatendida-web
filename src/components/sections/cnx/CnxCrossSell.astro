@@ -1,0 +1,16 @@
+---
+import { CONECTIVIDAD } from "../../../data/conectividad.js";
+import Button from "../../ui/Button.astro";
+
+const { crossSell } = CONECTIVIDAD;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="cnx-crosssell reveal">
+      <h2 class="h2">{crossSell.title}</h2>
+      <p>{crossSell.subtitle}</p>
+      <Button href={crossSell.href} variant="primary" icon="rocket">{crossSell.cta}</Button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import { CONECTIVIDAD } from "../../../data/conectividad.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+
+const { comparativa } = CONECTIVIDAD;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">La diferencia real</span>
+      <h2 class="h2">Operadores tradicionales frente a Llamada Atendida</h2>
+    </div>
+
+    <div class="cnx-comparativa-grid reveal">
+      <div class="cnx-comparativa-col tradicional glass-card">
+        <div class="icon-tile"><Icon name={comparativa.tradicional.icon} /></div>
+        <h3>{comparativa.tradicional.title}</h3>
+        <ul>
+          {comparativa.tradicional.items.map((i) => (
+            <li><Icon name="x-circle" />{i}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="cnx-comparativa-col nosotros glass-card">
+        <div class="icon-tile"><Icon name={comparativa.nosotros.icon} /></div>
+        <h3>{comparativa.nosotros.title}</h3>
+        <ul>
+          {comparativa.nosotros.items.map((i) => (
+            <li><Icon name="check-circle" />{i}</li>
+          ))}
+        </ul>
+      </div>
+
+      <span class="cnx-comparativa-vs" aria-hidden="true">VS</span>
+    </div>
+
+    <div class="cnx-comparativa-banner reveal">
+      <p>{comparativa.banner}</p>
+      <Button href="#presupuesto" variant="primary" size="sm" icon="arrow-right">Solicitar presupuesto</Button>
+    </div>
+  </div>
+</section>

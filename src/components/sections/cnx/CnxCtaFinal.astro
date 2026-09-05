@@ -1,0 +1,83 @@
+---
+import { CONECTIVIDAD } from "../../../data/conectividad.js";
+import Button from "../../ui/Button.astro";
+
+const { ctaFinal } = CONECTIVIDAD;
+---
+
+<section class="section" id="presupuesto">
+  <div class="container">
+    <div class="cnx-cta-final reveal">
+      <span class="eyebrow" style="color:var(--accent-ink);opacity:.75;">Presupuesto en 24h</span>
+      <h2 class="h2">{ctaFinal.title}</h2>
+      <p class="lead">{ctaFinal.subtitle}</p>
+
+      <form class="cnx-cta-form" data-contact-form novalidate>
+        <div class="form-grid two">
+          <div class="field">
+            <label for="cnx-nombre">Nombre y apellidos *</label>
+            <input id="cnx-nombre" name="nombre" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="cnx-negocio">Nombre del negocio *</label>
+            <input id="cnx-negocio" name="negocio" type="text" required autocomplete="organization" />
+          </div>
+        </div>
+
+        <div class="form-grid two" style="margin-top:1.1rem;">
+          <div class="field">
+            <label for="cnx-email">Email *</label>
+            <input id="cnx-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="cnx-telefono">Teléfono</label>
+            <input id="cnx-telefono" name="telefono" type="tel" autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:1.1rem;">
+          <label for="cnx-direccion">Dirección o ubicación (opcional)</label>
+          <input id="cnx-direccion" name="direccion" type="text" placeholder="Calle, ciudad" autocomplete="street-address" />
+        </div>
+
+        <div class="field" style="margin-top:1.1rem;">
+          <label>¿Qué te interesa?</label>
+          <div class="cnx-service-checks">
+            {ctaFinal.servicios.map((s) => (
+              <label class="cnx-service-check">
+                <input type="checkbox" name="servicios" value={s} />
+                {s}
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:1.1rem;">
+          <label for="cnx-mensaje">Cuéntanos qué necesitas conectar</label>
+          <textarea id="cnx-mensaje" name="mensaje"></textarea>
+        </div>
+
+        <div class="field-check" style="margin-top:1.2rem;">
+          <input id="cnx-rgpd" name="rgpd" type="checkbox" required />
+          <label for="cnx-rgpd">
+            He leído y acepto la <a href="/politica-privacidad">política de privacidad</a>.
+            Tus datos se tratan conforme al RGPD únicamente para responder a tu solicitud.
+          </label>
+        </div>
+
+        <div class="form-status" data-form-status role="status"></div>
+
+        <Button type="submit" variant="primary" class="btn-block" noMagnetic style="margin-top:1.4rem;" data-form-submit>
+          {ctaFinal.cta}
+        </Button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { safe, onReady } from "../../../scripts/utils.js";
+  import { initContactForm } from "../../../scripts/effects/contact-form.js";
+
+  onReady(() => safe(initContactForm, "initContactForm"));
+</script>

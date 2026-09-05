@@ -1,0 +1,26 @@
+---
+import { ATENCION_247 } from "../../../data/atencion-24-7.js";
+import Icon from "../../ui/Icon.astro";
+
+const { canales } = ATENCION_247;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Canales de atención</span>
+      <h2 class="h2">Múltiples canales, una sola experiencia</h2>
+      <p class="lead" style="margin-top:1rem;">{canales.lead}</p>
+    </div>
+
+    <div class="atn-canales-grid stagger">
+      {canales.items.map((c) => (
+        <article class="glass-card atn-canal-card">
+          <div class="icon-tile"><Icon name={c.icon} /></div>
+          <h3>{c.title}</h3>
+          <p>{c.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

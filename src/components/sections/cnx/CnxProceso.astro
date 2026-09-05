@@ -1,0 +1,31 @@
+---
+import { CONECTIVIDAD } from "../../../data/conectividad.js";
+import Icon from "../../ui/Icon.astro";
+
+const { proceso, procesoCierre } = CONECTIVIDAD;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Cómo empezamos</span>
+      <h2 class="h2">Conectamos tu negocio en 3 pasos</h2>
+    </div>
+
+    <div class="cnx-proceso-grid stagger">
+      {proceso.map((p) => (
+        <div class="cnx-proceso-card glass-card">
+          <div class="cnx-proceso-circle">{p.n}</div>
+          <h3>
+            <Icon name={p.icon} style="width:17px;height:17px;color:var(--teal-600);flex-shrink:0;" />
+            {p.title}
+          </h3>
+          <p>{p.text}</p>
+          <Icon name="arrow-right" class="cnx-proceso-arrow" />
+        </div>
+      ))}
+    </div>
+
+    <p class="cnx-proceso-cierre reveal">{procesoCierre}</p>
+  </div>
+</section>

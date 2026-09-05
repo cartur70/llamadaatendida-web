@@ -1,0 +1,45 @@
+---
+import { LEGAL_PROTECCION } from "../../../data/legal-proteccion.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+
+const { comparativa } = LEGAL_PROTECCION;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">La diferencia real</span>
+      <h2 class="h2">Sin protección frente a Llamada Atendida</h2>
+    </div>
+
+    <div class="lg-comparativa-grid reveal">
+      <div class="lg-comparativa-col sin glass-card">
+        <div class="icon-tile"><Icon name={comparativa.sinProteccion.icon} /></div>
+        <h3>{comparativa.sinProteccion.title}</h3>
+        <ul>
+          {comparativa.sinProteccion.items.map((i) => (
+            <li><Icon name="x-circle" />{i}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="lg-comparativa-col con glass-card">
+        <div class="icon-tile"><Icon name={comparativa.conNosotros.icon} /></div>
+        <h3>{comparativa.conNosotros.title}</h3>
+        <ul>
+          {comparativa.conNosotros.items.map((i) => (
+            <li><Icon name="check-circle" />{i}</li>
+          ))}
+        </ul>
+      </div>
+
+      <span class="lg-comparativa-vs" aria-hidden="true">VS</span>
+    </div>
+
+    <div class="lg-comparativa-banner reveal">
+      <p>{comparativa.banner}</p>
+      <Button href="#auditoria" variant="primary" size="sm" icon="arrow-right">Solicitar auditoría legal</Button>
+    </div>
+  </div>
+</section>

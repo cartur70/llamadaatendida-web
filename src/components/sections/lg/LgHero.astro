@@ -1,0 +1,52 @@
+---
+import { LEGAL_PROTECCION } from "../../../data/legal-proteccion.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+import Photo from "../../ui/Photo.astro";
+import heroPhoto from "../../../assets/img/rgpd-cumplimiento-legal.jpg";
+
+const { hero } = LEGAL_PROTECCION;
+---
+
+<section class="hero">
+  <div class="hero-mesh" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">{hero.eyebrow}</span>
+        <h1 class="h1 hero-title">{hero.title}</h1>
+        <p class="lead hero-sub">{hero.subtitle}</p>
+
+        <div class="hero-actions">
+          <Button href="#auditoria" variant="primary" icon="arrow-right">Solicitar auditoría legal gratuita</Button>
+          <Button href="#protecciones" variant="ghost">Ver coberturas del seguro RC</Button>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" style="transition-delay:.15s">
+        <div class="hero-photo-frame">
+          <Photo
+            src={heroPhoto}
+            alt="Firma de un documento legal, representando el blindaje jurídico del negocio"
+            eager
+            quality={85}
+            widths={[400, 800, 1200]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+
+        <div class="lg-hero-chip glass-card">
+          <Icon name="shield" />
+          RGPD cumplido
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { safe, onReady } from "../../../scripts/utils.js";
+  import { initMagnetic } from "../../../scripts/effects/magnetic.js";
+
+  onReady(() => safe(initMagnetic, "initMagnetic"));
+</script>

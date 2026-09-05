@@ -1,0 +1,51 @@
+---
+import { ATENCION_247 } from "../../../data/atencion-24-7.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+
+const { comparativa } = ATENCION_247;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">La diferencia real</span>
+      <h2 class="h2">IA aislada frente a atención híbrida</h2>
+    </div>
+
+    <div class="atn-comparativa-grid reveal">
+      <div class="atn-comparativa-col aislada glass-card">
+        <div class="atn-comparativa-icons">
+          <div class="icon-tile"><Icon name={comparativa.aislada.icon} /></div>
+        </div>
+        <h3>{comparativa.aislada.title}</h3>
+        <ul>
+          {comparativa.aislada.items.map((i) => (
+            <li><Icon name="x-circle" />{i}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="atn-comparativa-col hibrida glass-card">
+        <div class="atn-comparativa-icons">
+          {comparativa.hibrida.icons.map((icon) => (
+            <div class="icon-tile"><Icon name={icon} /></div>
+          ))}
+        </div>
+        <h3>{comparativa.hibrida.title}</h3>
+        <ul>
+          {comparativa.hibrida.items.map((i) => (
+            <li><Icon name="check-circle" />{i}</li>
+          ))}
+        </ul>
+      </div>
+
+      <span class="atn-comparativa-vs" aria-hidden="true">VS</span>
+    </div>
+
+    <div class="atn-comparativa-banner reveal">
+      <p>{comparativa.banner}</p>
+      <Button href="#demo" variant="primary" size="sm" icon="arrow-right">Solicitar demo</Button>
+    </div>
+  </div>
+</section>

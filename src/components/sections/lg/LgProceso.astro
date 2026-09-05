@@ -1,0 +1,31 @@
+---
+import { LEGAL_PROTECCION } from "../../../data/legal-proteccion.js";
+import Icon from "../../ui/Icon.astro";
+
+const { proceso, procesoCierre } = LEGAL_PROTECCION;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Cómo empezamos</span>
+      <h2 class="h2">Auditoría legal gratuita. En 3 pasos.</h2>
+    </div>
+
+    <div class="lg-proceso-grid stagger">
+      {proceso.map((p) => (
+        <div class="lg-proceso-card glass-card">
+          <div class="lg-proceso-circle">{p.n}</div>
+          <h3>
+            <Icon name={p.icon} style="width:17px;height:17px;color:var(--teal-600);flex-shrink:0;" />
+            {p.title}
+          </h3>
+          <p>{p.text}</p>
+          <Icon name="arrow-right" class="lg-proceso-arrow" />
+        </div>
+      ))}
+    </div>
+
+    <p class="lg-proceso-cierre reveal">{procesoCierre}</p>
+  </div>
+</section>

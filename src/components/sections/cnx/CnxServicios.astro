@@ -1,0 +1,53 @@
+---
+import { CONECTIVIDAD } from "../../../data/conectividad.js";
+import Icon from "../../ui/Icon.astro";
+
+const { servicios, serviciosCierre } = CONECTIVIDAD;
+---
+
+<section class="section" id="servicios-conectividad">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Cobertura completa</span>
+      <h2 class="h2">Cuatro servicios, un solo proveedor</h2>
+    </div>
+
+    <div class="cnx-servicios-layout">
+      <div class="cnx-servicios-visual reveal" aria-hidden="true">
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#fff" stroke-width="2" stroke-dasharray="4 5" opacity="0.7">
+            <line x1="150" y1="150" x2="80" y2="70" />
+            <line x1="150" y1="150" x2="230" y2="80" />
+            <line x1="150" y1="150" x2="150" y2="250" />
+          </g>
+          <circle cx="150" cy="150" r="80" fill="none" stroke="#fff" stroke-width="2" opacity="0.25" />
+          <circle cx="150" cy="150" r="55" fill="none" stroke="#fff" stroke-width="2" opacity="0.45" />
+          <circle cx="150" cy="150" r="30" fill="none" stroke="#fff" stroke-width="3" opacity="0.8" />
+          <circle cx="150" cy="150" r="11" fill="var(--amber-400)" />
+
+          <rect x="55" y="45" width="52" height="36" rx="5" fill="#fff" />
+          <rect x="60" y="50" width="42" height="23" rx="2" fill="var(--teal-700)" />
+
+          <rect x="212" y="55" width="26" height="44" rx="6" fill="#fff" />
+          <rect x="216" y="63" width="18" height="27" rx="1.5" fill="var(--teal-700)" />
+
+          <rect x="120" y="234" width="60" height="38" rx="5" fill="#fff" />
+          <rect x="126" y="240" width="48" height="23" rx="2" fill="var(--teal-700)" />
+          <rect x="140" y="274" width="20" height="4" rx="2" fill="#fff" opacity="0.75" />
+        </svg>
+      </div>
+
+      <div class="cnx-servicios-grid stagger">
+        {servicios.map((s) => (
+          <article class="glass-card cnx-servicio-card">
+            <div class="icon-tile"><Icon name={s.icon} /></div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <p class="cnx-servicios-cierre reveal">{serviciosCierre}</p>
+  </div>
+</section>

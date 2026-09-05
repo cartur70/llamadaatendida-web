@@ -1,0 +1,56 @@
+---
+import { ATENCION_247 } from "../../../data/atencion-24-7.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+
+const { hibrido } = ATENCION_247;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">Atención 24/7 híbrida y humana</span>
+      <h2 class="h2">IA que responde, humanos que conectan</h2>
+      <p class="lead" style="margin-top:1rem;">
+        Inteligencia artificial y talento humano trabajando juntos, no por separado —
+        la combinación que garantiza experiencias rápidas, resolutivas y cercanas.
+      </p>
+    </div>
+
+    <div class="atn-hibrido-diagram reveal">
+      <div class="atn-hibrido-half ia">
+        <h3>{hibrido.ia.title}</h3>
+        <ul>
+          {hibrido.ia.points.map((p) => (
+            <li><Icon name="check" class="check" />{p}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="atn-hibrido-half humanos">
+        <h3>{hibrido.humanos.title}</h3>
+        <ul>
+          {hibrido.humanos.points.map((p) => (
+            <li><Icon name="check" class="check" />{p}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="atn-hibrido-center">
+        <strong>{hibrido.centro.title}</strong>
+        <span>{hibrido.centro.subtitle}</span>
+      </div>
+    </div>
+
+    <div class="atn-hibrido-statbar reveal" style="transition-delay:.1s">
+      <div class="atn-hibrido-statbar-grid">
+        {hibrido.stats.map((s) => (
+          <div class="atn-hibrido-statbar-item">
+            <span>{s.label}</span>
+            <b>{s.value}</b>
+          </div>
+        ))}
+      </div>
+      <Button href="#demo" variant="primary" size="sm" icon="arrow-right">{hibrido.banner}</Button>
+    </div>
+  </div>
+</section>
