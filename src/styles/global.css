@@ -1082,6 +1082,17 @@ input[type="range"]::-moz-range-thumb {
 .atn-hibrido-half { padding: clamp(2.25rem, 5vw, 3.25rem) clamp(1.5rem, 4vw, 2.5rem); }
 .atn-hibrido-half.ia { background: linear-gradient(150deg, var(--teal-800), var(--teal-600)); color: #fff; }
 .atn-hibrido-half.humanos { background: linear-gradient(150deg, var(--amber-400), var(--amber-500)); color: var(--accent-ink); }
+/* Desde 760px el círculo .atn-hibrido-center queda absoluto y centrado en todo el diagrama:
+   reservamos su radio (84px) + 16px para que no tape el icono/texto de la columna "Humanos",
+   que por estar pegada al borde compartido es la que queda debajo del círculo. */
+@media (min-width: 760px) {
+  .atn-hibrido-half.humanos { padding-inline-start: 100px; }
+}
+/* Entre 760 y 900px el final de la línea más larga de la columna "IA" ("Resuelve consultas
+   frecuentes") entra también en el círculo por el otro lado; mismo margen en ese rango. */
+@media (min-width: 760px) and (max-width: 899px) {
+  .atn-hibrido-half.ia { padding-inline-end: 100px; }
+}
 .atn-hibrido-half h3 { font-size: 1.2rem; margin-bottom: 1.25rem; }
 .atn-hibrido-half.ia h3 { color: #fff; }
 .atn-hibrido-half.humanos h3 { color: var(--accent-ink); }
