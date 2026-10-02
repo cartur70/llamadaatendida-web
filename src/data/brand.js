@@ -17,8 +17,10 @@ export const BRAND = {
     address: "Calle Concepción Arenal 1, 1ºA, 28924 Alcorcón (Madrid)",
   },
 
-  ctaPrimary: "Solicitar demo",
+  ctaPrimary: "Solicitar información",
   ctaSecondary: "Hablar con un asesor",
+  ctaAreaPrivada: "Área privada",
+  ctaAreaPrivadaHref: "https://clientes.llamadaatendida.com/inicio",
 
   nav: [
     { label: "Inicio", href: "/" },
