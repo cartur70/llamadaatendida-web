@@ -1461,3 +1461,48 @@ input[type="range"]::-moz-range-thumb {
 }
 .cnx-service-check:has(input:checked) { border-color: var(--teal-600); background: var(--teal-100); }
 .cnx-service-check input { margin: 0; }
+
+/* =============================================================
+   20. Texto justificado (párrafos de tarjetas/pasos, ≥768px)
+   Solo los párrafos descriptivos indicados — no titulares, subtítulos
+   cortos ni listas con check. En .atn-flujo-step el bloque ya estaba
+   centrado: se justifica pero con la última línea centrada para no
+   cambiar el aspecto.
+   ============================================================= */
+@media (min-width: 768px) {
+  .pilar-body > p,
+  .confianza-card p,
+  .proceso-card p,
+  .wc-proceso-card p,
+  .cotizador-assumptions {
+    text-align: justify;
+    hyphens: auto;
+  }
+  .atn-flujo-step p {
+    text-align: justify;
+    text-align-last: center;
+    hyphens: auto;
+  }
+  /* "Infraestructura propia": "Telecomunicaciones" es una palabra muy larga que deja un
+     hueco de 38-60px antes de "y" en su columna — medido en 768/1024/1280/1440px, siempre
+     el peor caso con diferencia. Se excluye del justificado y se deja a la izquierda. */
+  .confianza-grid > .confianza-card:nth-child(3) p {
+    text-align: left;
+  }
+  /* Pilar "Telecomunicaciones & Equipamiento": mismo caso ("telecomunicaciones" no cabe
+     en la columna de 4 columnas desde 1280px) — hueco de 43px antes de "para". */
+  .pilares-grid > .pilar-card:nth-child(4) .pilar-body > p {
+    text-align: left;
+  }
+  /* Paso 3 "Gestión activa" (Web & Conversión): a 768px deja un hueco de 104px entre
+     "Publicamos," y "respondemos" — el peor caso con diferencia de todo el sitio. */
+  .wc-proceso-grid > .wc-proceso-card:nth-child(3) p {
+    text-align: left;
+  }
+  /* Paso 4 "Resultado" (Atención 24/7): hueco de 48.6px antes de "excepcional," en
+     1280/1440px. Se deja a la izquierda (no centrado, para no disimular el hueco). */
+  .atn-flujo-grid > .atn-flujo-step:nth-child(4) p {
+    text-align: left;
+    text-align-last: left;
+  }
+}
