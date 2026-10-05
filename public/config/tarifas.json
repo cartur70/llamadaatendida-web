@@ -1,0 +1,12 @@
+{
+  "_aviso": "Tarifas del simulador de ahorro (home y Atención 24/7). Edita los números y guarda — no hace falta recompilar la web. Ver docs/simulador-tarifas.md para la guía completa.",
+  "llamadasPorEmpleado": 600,
+  "costeEmpleadoMes": 2200,
+  "costeLlamadaIA": 1.2,
+  "factorCobertura247Humano": 2.5,
+  "factorCobertura247IA": 1.2,
+  "minLlamadas": 100,
+  "maxLlamadas": 5000,
+  "stepLlamadas": 50,
+  "defaultLlamadas": 1200
+}
