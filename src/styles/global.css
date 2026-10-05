@@ -1506,3 +1506,40 @@ input[type="range"]::-moz-range-thumb {
     text-align-last: left;
   }
 }
+
+/* =============================================================
+   21. Texto justificado extra (≥768px)
+   Tarjetas de servicios/canales/protecciones, pasos de Legal y
+   Conectividad, respuestas de FAQ y textos legales (solo párrafos:
+   títulos y listas siguen a la izquierda). Misma política que la
+   sección 20: si un bloque deja un hueco >40px entre palabras, se
+   excluye abajo y se deja a la izquierda.
+   ============================================================= */
+@media (min-width: 768px) {
+  .wc-service-card p,
+  .atn-canal-card p,
+  .lg-proteccion-card p,
+  .cnx-servicio-card p,
+  .lg-proceso-card p,
+  .faq-a,
+  .legal-content p {
+    text-align: justify;
+    hyphens: auto;
+  }
+  /* Excluidos del justificado por hueco >40px entre palabras (medido a 768/1024/1280/1440px);
+     se dejan a la izquierda: */
+  /* Legal · "Infraestructura propia" (3.ª tarjeta): 43,5px antes de "depender" a 1024px (col. 187px). */
+  .lg-protecciones-grid > .lg-proteccion-card:nth-child(3) p {
+    text-align: left;
+  }
+  /* Legal · paso 3 "Implementación": 66,3px entre "Aplicamos" y "las" a 768px (col. 157px). */
+  .lg-proceso-grid > .lg-proceso-card:nth-child(3) p {
+    text-align: left;
+  }
+  /* Conectividad · "Alarmas y seguridad perimetral" (3.ª tarjeta): 43,9px antes de "sistemas" a 1280/1440px (col. 249px). */
+  .cnx-servicios-grid > .cnx-servicio-card:nth-child(3) p {
+    text-align: left;
+  }
+  /* Conectividad · los 3 pasos (.cnx-proceso-card p) superan 40px a 768px (82, 68,4 y 47,9px con col. de 157px):
+     el bloque entero se queda a la izquierda, por eso no figura en la lista de arriba. */
+}
