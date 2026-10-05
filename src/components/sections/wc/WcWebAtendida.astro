@@ -1,0 +1,31 @@
+---
+import { WEB_CONVERSION } from "../../../data/web-conversion.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+
+const { webAtendida } = WEB_CONVERSION;
+---
+
+<section class="section" id="web-atendida">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">{webAtendida.eyebrow}</span>
+      <h2 class="h2">{webAtendida.title}</h2>
+      <p class="lead" style="margin-top:1rem;">{webAtendida.lead}</p>
+    </div>
+
+    <div class="wc-web-grid stagger">
+      {webAtendida.items.map((s) => (
+        <article class="glass-card wc-web-card">
+          <div class="icon-tile"><Icon name={s.icon} /></div>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="wc-web-cta reveal">
+      <Button href={webAtendida.href} variant="ghost" icon="arrow-right">{webAtendida.cta}</Button>
+    </div>
+  </div>
+</section>

@@ -74,6 +74,26 @@ export const WEB_CONVERSION = {
     href: "/soluciones/atencion-24-7",
   },
 
+  webAtendida: {
+    eyebrow: "Web + atención",
+    title: "Tu web, atendida desde el primer día",
+    lead: "Cuando creamos tu web, también puedes contratar su atención: un chat en la propia web y un teléfono publicado, atendidos por nuestro sistema híbrido de IA y agentes humanos.",
+    items: [
+      {
+        title: "Chat en tu web",
+        text: "Tus visitantes resuelven dudas al instante, también fuera de horario.",
+        icon: "message",
+      },
+      {
+        title: "Teléfono publicado",
+        text: "Un número visible en tu web, atendido por nosotros según las instrucciones que nos indiques.",
+        icon: "phone",
+      },
+    ],
+    cta: "Descubrir Atención 24/7",
+    href: "/soluciones/atencion-24-7",
+  },
+
   casoExito: {
     kicker: "Caso real",
     empresa: "Empresa de servicios en Madrid",
@@ -105,6 +125,10 @@ export const WEB_CONVERSION = {
     {
       q: "¿Qué pasa si quiero hacer cambios después?",
       a: "Puedes pedirnos ajustes de contenido, diseño o estructura cuando lo necesites; no te dejamos con una web estática que nadie mantiene.",
+    },
+    {
+      q: "¿Puedo atender mi web con chat o teléfono?",
+      a: "Sí. Son servicios que puedes contratar junto con la creación de tu web y que atiende nuestro sistema híbrido de IA y agentes humanos.",
     },
   ],
 
