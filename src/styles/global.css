@@ -409,7 +409,7 @@ input, textarea, select { font: inherit; color: inherit; }
 }
 .hero-grid {
   display: grid; gap: clamp(2.5rem, 6vw, 4rem);
-  align-items: center;
+  align-items: start;
 }
 .hero-grid > * { min-width: 0; } /* evita que el contenido interno (waveform, badges) fuerce overflow horizontal */
 @media (min-width: 960px) {
@@ -424,10 +424,13 @@ input, textarea, select { font: inherit; color: inherit; }
 .hero-sub { max-width: 46ch; margin-bottom: 2rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-bottom: 2.75rem; }
 .hero-trust {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem;
 }
 @media (min-width: 620px) {
-  .hero-trust { grid-template-columns: repeat(4, 1fr); }
+  .hero-trust { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (min-width: 960px) and (max-width: 1180px) {
+  .hero-trust { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .hero-trust-item {
   display: flex; align-items: center; gap: 0.6rem;
@@ -682,10 +685,23 @@ input[type="range"]::-moz-range-thumb {
 .confianza-photo { border-radius: var(--radius-lg); overflow: clip; box-shadow: var(--shadow-md); aspect-ratio: 16 / 9; }
 @media (min-width: 900px) { .confianza-photo { aspect-ratio: auto; min-height: 100%; } }
 .confianza-photo img { width: 100%; height: 100%; object-fit: cover; }
-.confianza-grid { display: grid; gap: 1.25rem; }
+.confianza-grid { display: grid; gap: 1.25rem; container-type: inline-size; }
 @media (min-width: 620px) { .confianza-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 900px) { .confianza-grid { grid-template-columns: repeat(2, 1fr); } }
 .confianza-card { padding: 1.75rem; display: flex; gap: 1.1rem; align-items: flex-start; }
+/* Cuando la columna de texto baja de ~170px (tarjeta ≈300px), icono encima del título en vez de al lado.
+   Acotado a partir de 620px de viewport: por debajo, .confianza-grid ya es de una sola columna y
+   las tarjetas tienen ancho de sobra (layout en fila original, sin romper nada que ya funcionaba). */
+@media (min-width: 620px) {
+  @container (max-width: 620px) {
+    .confianza-card { flex-direction: column; }
+  }
+}
+.confianza-card h3 {
+  /* La columna estrecha (ver arriba) rompía palabras largas ("permanencia", "Responsabilidad")
+     a mitad por la regla global h1-h4 break-word; aquí se desactiva solo para estos títulos. */
+  overflow-wrap: normal; word-break: normal; hyphens: manual;
+}
 .confianza-card .icon-tile { background: var(--teal-100); color: var(--teal-700); }
 .confianza-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
 .confianza-card p { font-size: 0.88rem; color: var(--ink-mute); }
@@ -1066,6 +1082,17 @@ input[type="range"]::-moz-range-thumb {
 .atn-hibrido-half { padding: clamp(2.25rem, 5vw, 3.25rem) clamp(1.5rem, 4vw, 2.5rem); }
 .atn-hibrido-half.ia { background: linear-gradient(150deg, var(--teal-800), var(--teal-600)); color: #fff; }
 .atn-hibrido-half.humanos { background: linear-gradient(150deg, var(--amber-400), var(--amber-500)); color: var(--accent-ink); }
+/* Desde 760px el círculo .atn-hibrido-center queda absoluto y centrado en todo el diagrama:
+   reservamos su radio (84px) + 16px para que no tape el icono/texto de la columna "Humanos",
+   que por estar pegada al borde compartido es la que queda debajo del círculo. */
+@media (min-width: 760px) {
+  .atn-hibrido-half.humanos { padding-inline-start: 100px; }
+}
+/* Entre 760 y 900px el final de la línea más larga de la columna "IA" ("Resuelve consultas
+   frecuentes") entra también en el círculo por el otro lado; mismo margen en ese rango. */
+@media (min-width: 760px) and (max-width: 899px) {
+  .atn-hibrido-half.ia { padding-inline-end: 100px; }
+}
 .atn-hibrido-half h3 { font-size: 1.2rem; margin-bottom: 1.25rem; }
 .atn-hibrido-half.ia h3 { color: #fff; }
 .atn-hibrido-half.humanos h3 { color: var(--accent-ink); }
@@ -1434,3 +1461,48 @@ input[type="range"]::-moz-range-thumb {
 }
 .cnx-service-check:has(input:checked) { border-color: var(--teal-600); background: var(--teal-100); }
 .cnx-service-check input { margin: 0; }
+
+/* =============================================================
+   20. Texto justificado (párrafos de tarjetas/pasos, ≥768px)
+   Solo los párrafos descriptivos indicados — no titulares, subtítulos
+   cortos ni listas con check. En .atn-flujo-step el bloque ya estaba
+   centrado: se justifica pero con la última línea centrada para no
+   cambiar el aspecto.
+   ============================================================= */
+@media (min-width: 768px) {
+  .pilar-body > p,
+  .confianza-card p,
+  .proceso-card p,
+  .wc-proceso-card p,
+  .cotizador-assumptions {
+    text-align: justify;
+    hyphens: auto;
+  }
+  .atn-flujo-step p {
+    text-align: justify;
+    text-align-last: center;
+    hyphens: auto;
+  }
+  /* "Infraestructura propia": "Telecomunicaciones" es una palabra muy larga que deja un
+     hueco de 38-60px antes de "y" en su columna — medido en 768/1024/1280/1440px, siempre
+     el peor caso con diferencia. Se excluye del justificado y se deja a la izquierda. */
+  .confianza-grid > .confianza-card:nth-child(3) p {
+    text-align: left;
+  }
+  /* Pilar "Telecomunicaciones & Equipamiento": mismo caso ("telecomunicaciones" no cabe
+     en la columna de 4 columnas desde 1280px) — hueco de 43px antes de "para". */
+  .pilares-grid > .pilar-card:nth-child(4) .pilar-body > p {
+    text-align: left;
+  }
+  /* Paso 3 "Gestión activa" (Web & Conversión): a 768px deja un hueco de 104px entre
+     "Publicamos," y "respondemos" — el peor caso con diferencia de todo el sitio. */
+  .wc-proceso-grid > .wc-proceso-card:nth-child(3) p {
+    text-align: left;
+  }
+  /* Paso 4 "Resultado" (Atención 24/7): hueco de 48.6px antes de "excepcional," en
+     1280/1440px. Se deja a la izquierda (no centrado, para no disimular el hueco). */
+  .atn-flujo-grid > .atn-flujo-step:nth-child(4) p {
+    text-align: left;
+    text-align-last: left;
+  }
+}
