@@ -1,0 +1,32 @@
+---
+// Resumen breve de /soluciones/tecnologia para la home.
+import { TECNOLOGIA } from "../../../data/tecnologia.js";
+import Icon from "../../ui/Icon.astro";
+import Button from "../../ui/Button.astro";
+
+const { resumenHome } = TECNOLOGIA;
+---
+
+<section class="section" id="tecnologia">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">{resumenHome.eyebrow}</span>
+      <h2 class="h2">{resumenHome.title}</h2>
+      <p class="lead" style="margin-top:1rem;">{resumenHome.subtitle}</p>
+    </div>
+
+    <div class="tec-grid stagger">
+      {resumenHome.puntos.map((s) => (
+        <article class="glass-card tec-card">
+          <div class="icon-tile"><Icon name={s.icon} /></div>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="tec-resumen-cta reveal">
+      <Button href={resumenHome.href} variant="ghost" icon="arrow-right">{resumenHome.cta}</Button>
+    </div>
+  </div>
+</section>

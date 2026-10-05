@@ -1,0 +1,53 @@
+---
+import { getImage } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/layout/Nav.astro";
+import Footer from "../../components/layout/Footer.astro";
+import TecHero from "../../components/sections/tec/TecHero.astro";
+import TecAdaptacion from "../../components/sections/tec/TecAdaptacion.astro";
+import TecDisponibilidad from "../../components/sections/tec/TecDisponibilidad.astro";
+import AsiSeConfigura from "../../components/sections/AsiSeConfigura.astro";
+import TecCtaFinal from "../../components/sections/tec/TecCtaFinal.astro";
+import { BRAND } from "../../data/brand.js";
+import { TECNOLOGIA } from "../../data/tecnologia.js";
+import ogSourceImage from "../../assets/img/proceso-tecnologia.jpg";
+
+const ogImageResult = await getImage({ src: ogSourceImage, format: "jpg", width: 1200, height: 630 });
+// Mismo criterio que el resto de páginas de /soluciones/: dominio real de la marca.
+const pageURL = new URL("/soluciones/tecnologia", BRAND.url).toString();
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Tecnología propia para la atención al cliente",
+  name: "Tecnología propia",
+  description: TECNOLOGIA.seo.description,
+  provider: {
+    "@type": "Organization",
+    name: BRAND.legalName,
+    url: BRAND.url,
+    telephone: BRAND.contact.phone,
+  },
+  areaServed: "ES",
+  url: pageURL,
+};
+---
+
+<BaseLayout title={TECNOLOGIA.seo.title} description={TECNOLOGIA.seo.description} ogImage={ogImageResult.src} schema={serviceSchema}>
+  <Nav />
+  <main id="main">
+    <TecHero />
+    <TecAdaptacion />
+    <TecDisponibilidad />
+    <AsiSeConfigura />
+    <TecCtaFinal />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { safe, onReady } from "../../scripts/utils.js";
+  import { initReveal } from "../../scripts/effects/reveal.js";
+
+  onReady(() => safe(initReveal, "initReveal"));
+</script>

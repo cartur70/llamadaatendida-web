@@ -1,0 +1,68 @@
+---
+// Bloque reutilizable "Así se configura": versión completa en
+// /soluciones/tecnologia y compacta (solo los 4 pasos + enlace a la versión
+// completa) en la home y en Atención 24/7. Clases con prefijo cfg-.
+import { ASI_SE_CONFIGURA } from "../../data/tecnologia.js";
+import { BRAND } from "../../data/brand.js";
+import Icon from "../ui/Icon.astro";
+import Button from "../ui/Button.astro";
+
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+const { eyebrow, title, pasos, desvios, areaPrivada, href, ctaCompacto } = ASI_SE_CONFIGURA;
+---
+
+<section class="section" id="asi-se-configura">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2 class="h2">{title}</h2>
+    </div>
+
+    <div class="cfg-steps-grid stagger">
+      {pasos.map((p) => (
+        <article class="glass-card cfg-step">
+          <div class="cfg-step-circle">{p.n}</div>
+          <h3>
+            <Icon name={p.icon} />
+            {p.title}
+          </h3>
+          <p>{p.text}</p>
+        </article>
+      ))}
+    </div>
+
+    {compact ? (
+      <div class="cfg-compact-cta reveal">
+        <Button href={href} variant="ghost" icon="arrow-right">{ctaCompacto}</Button>
+      </div>
+    ) : (
+      <>
+        <div class="glass-card cfg-bloque reveal">
+          <h3>{desvios.title}</h3>
+          <p>{desvios.text}</p>
+          <ul class="cfg-desvios-grid">
+            {desvios.items.map((d) => (
+              <li class="cfg-desvio">
+                <div class="icon-tile"><Icon name={d.icon} /></div>
+                <span>{d.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="glass-card cfg-bloque reveal">
+          <h3>{areaPrivada.title}</h3>
+          <ul class="cfg-lista">
+            {areaPrivada.items.map((it) => (
+              <li><Icon name="check" />{it}</li>
+            ))}
+          </ul>
+          <Button href={BRAND.ctaAreaPrivadaHref} variant="ghost" size="sm" icon="arrow-right">{areaPrivada.cta}</Button>
+        </div>
+      </>
+    )}
+  </div>
+</section>

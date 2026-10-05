@@ -32,6 +32,7 @@ export const BRAND = {
         { label: "Atención 24/7", href: "/soluciones/atencion-24-7" },
         { label: "Legal & Protección", href: "/soluciones/legal-proteccion" },
         { label: "Conectividad", href: "/soluciones/conectividad" },
+        { label: "Tecnología", href: "/soluciones/tecnologia" },
       ],
     },
     { label: "Cómo funciona", href: "/#como-funciona" },

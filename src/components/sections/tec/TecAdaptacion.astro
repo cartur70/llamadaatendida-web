@@ -1,0 +1,25 @@
+---
+import { TECNOLOGIA } from "../../../data/tecnologia.js";
+import Icon from "../../ui/Icon.astro";
+
+const { adaptacion } = TECNOLOGIA;
+---
+
+<section class="section" id="adaptacion">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">{adaptacion.eyebrow}</span>
+      <h2 class="h2">{adaptacion.title}</h2>
+    </div>
+
+    <div class="tec-grid stagger">
+      {adaptacion.items.map((s) => (
+        <article class="glass-card tec-card">
+          <div class="icon-tile"><Icon name={s.icon} /></div>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,67 @@
+---
+import { TECNOLOGIA } from "../../../data/tecnologia.js";
+import { BRAND } from "../../../data/brand.js";
+import Button from "../../ui/Button.astro";
+
+const { ctaFinal } = TECNOLOGIA;
+---
+
+<section class="section" id="informacion">
+  <div class="container">
+    <div class="tec-cta-final reveal">
+      <span class="eyebrow" style="color:var(--accent-ink);opacity:.75;">{ctaFinal.eyebrow}</span>
+      <h2 class="h2">{ctaFinal.title}</h2>
+      <p class="lead">{ctaFinal.subtitle}</p>
+
+      <form class="tec-cta-form" data-contact-form novalidate>
+        <div class="form-grid two">
+          <div class="field">
+            <label for="tec-nombre">Nombre y apellidos *</label>
+            <input id="tec-nombre" name="nombre" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="tec-negocio">Nombre del negocio *</label>
+            <input id="tec-negocio" name="negocio" type="text" required autocomplete="organization" />
+          </div>
+        </div>
+
+        <div class="form-grid two" style="margin-top:1.1rem;">
+          <div class="field">
+            <label for="tec-email">Email *</label>
+            <input id="tec-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="tec-telefono">Teléfono</label>
+            <input id="tec-telefono" name="telefono" type="tel" autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:1.1rem;">
+          <label for="tec-mensaje">Cuéntanos qué necesitas</label>
+          <textarea id="tec-mensaje" name="mensaje"></textarea>
+        </div>
+
+        <div class="field-check" style="margin-top:1.2rem;">
+          <input id="tec-rgpd" name="rgpd" type="checkbox" required />
+          <label for="tec-rgpd">
+            He leído y acepto la <a href="/politica-privacidad">política de privacidad</a>.
+            Tus datos se tratan conforme al RGPD únicamente para responder a tu solicitud.
+          </label>
+        </div>
+
+        <div class="form-status" data-form-status role="status"></div>
+
+        <Button type="submit" variant="primary" class="btn-block" noMagnetic style="margin-top:1.4rem;" data-form-submit>
+          {BRAND.ctaPrimary}
+        </Button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { safe, onReady } from "../../../scripts/utils.js";
+  import { initContactForm } from "../../../scripts/effects/contact-form.js";
+
+  onReady(() => safe(initContactForm, "initContactForm"));
+</script>

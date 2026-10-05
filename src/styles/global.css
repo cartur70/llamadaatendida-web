@@ -1543,3 +1543,122 @@ input[type="range"]::-moz-range-thumb {
   /* Conectividad · los 3 pasos (.cnx-proceso-card p) superan 40px a 768px (82, 68,4 y 47,9px con col. de 157px):
      el bloque entero se queda a la izquierda, por eso no figura en la lista de arriba. */
 }
+
+/* =============================================================
+   22. Fase 4 — contenido nuevo
+   · tec-  → /soluciones/tecnologia y resumen "Tecnología propia" de la home
+   · cfg-  → bloque reutilizable "Así se configura"
+   · atn-mas- → "Más servicios" de Atención 24/7
+   · wc-web-  → "Tu web, atendida desde el primer día" de Web & Conversión
+   Mismo patrón visual que .wc-service-card / .wc-proceso-card (tarjetas con
+   icono apilado encima del texto, así que no hay columnas de texto estrechas
+   junto a un icono). Los títulos anulan el break-word global de h1-h4.
+   ============================================================= */
+
+/* --- Hero de /soluciones/tecnologia: chip estático --- */
+.tec-hero-chip {
+  position: absolute; bottom: 5%; left: 4%; z-index: 2;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 1rem; border-radius: var(--radius-pill);
+  font-family: var(--display); font-weight: 700; font-size: 0.82rem; color: var(--teal-800);
+}
+.tec-hero-chip svg { width: 17px; height: 17px; color: var(--teal-700); flex-shrink: 0; }
+@media (max-width: 539px) { .tec-hero-chip { left: 2%; bottom: 3%; } }
+
+/* --- Rejillas --- */
+.tec-grid, .atn-mas-grid, .wc-web-grid, .cfg-steps-grid { display: grid; gap: 1.5rem; }
+@media (min-width: 620px) {
+  .tec-grid, .atn-mas-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 720px) {
+  .wc-web-grid, .cfg-steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1080px) {
+  .tec-grid, .atn-mas-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  /* 10 tarjetas en 4 columnas: las dos últimas ocupan 2 columnas para cerrar la fila */
+  .atn-mas-card:nth-last-child(-n+2) { grid-column: span 2; }
+}
+.wc-web-grid { max-width: 920px; margin-inline: auto; }
+
+/* --- Tarjetas icono + título + texto --- */
+.tec-card, .atn-mas-card, .wc-web-card {
+  padding: 2rem 1.75rem; display: flex; flex-direction: column; gap: 1rem;
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
+}
+.tec-card:hover, .atn-mas-card:hover, .wc-web-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.tec-card .icon-tile, .atn-mas-card .icon-tile, .wc-web-card .icon-tile { background: var(--teal-100); color: var(--teal-700); }
+.tec-card h3, .atn-mas-card h3, .wc-web-card h3 {
+  font-size: 1.05rem; overflow-wrap: normal; word-break: normal; hyphens: manual;
+}
+.tec-card p, .atn-mas-card p, .wc-web-card p { font-size: 0.9rem; color: var(--ink-mute); }
+
+.tec-resumen-cta, .wc-web-cta, .cfg-compact-cta { margin-top: 2.25rem; text-align: center; }
+
+/* --- "Así se configura" --- */
+.cfg-step { position: relative; padding: 1.75rem; }
+.cfg-step-circle {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--teal-700); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-weight: 800; font-size: 1.05rem; margin-bottom: 1.1rem;
+}
+.cfg-step h3 {
+  display: flex; align-items: center; gap: 0.5rem; font-size: 1.05rem; margin-bottom: 0.4rem;
+  overflow-wrap: normal; word-break: normal; hyphens: manual;
+}
+.cfg-step h3 svg { width: 17px; height: 17px; color: var(--teal-600); flex-shrink: 0; }
+.cfg-step p { font-size: 0.92rem; color: var(--ink-mute); }
+
+.cfg-bloque { margin-top: 1.5rem; padding: clamp(1.5rem, 4vw, 2.25rem); }
+.cfg-bloque h3 { font-size: 1.2rem; margin-bottom: 0.5rem; overflow-wrap: normal; word-break: normal; hyphens: manual; }
+.cfg-bloque > p { font-size: 0.95rem; color: var(--ink-mute); margin-bottom: 1.25rem; }
+
+.cfg-desvios-grid { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 900px) { .cfg-desvios-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.cfg-desvio {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem;
+  padding: 1.15rem; border-radius: var(--radius-md); background: rgba(255,255,255,0.6); border: 1px solid var(--line);
+}
+.cfg-desvio .icon-tile { width: 44px; height: 44px; background: var(--teal-100); color: var(--teal-700); }
+.cfg-desvio .icon-tile svg { width: 20px; height: 20px; }
+.cfg-desvio span {
+  font-family: var(--display); font-weight: 700; font-size: 0.92rem; color: var(--ink);
+  overflow-wrap: normal; word-break: normal; hyphens: manual;
+}
+
+.cfg-lista { list-style: none; padding: 0; margin: 0 0 1.5rem; display: grid; gap: 0.75rem; }
+.cfg-lista li { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.95rem; color: var(--ink-soft); }
+.cfg-lista li svg { width: 18px; height: 18px; color: var(--teal-700); flex-shrink: 0; margin-top: 0.2rem; }
+
+/* --- CTA final de /soluciones/tecnologia (mismo estilo que el resto de páginas) --- */
+.tec-cta-final {
+  border-radius: var(--radius-lg); text-align: center; position: relative; overflow: clip;
+  padding: clamp(3rem, 7vw, 4.5rem) clamp(1.5rem, 5vw, 3rem);
+  background: linear-gradient(135deg, var(--amber-500), var(--amber-600));
+}
+.tec-cta-final h2 { color: var(--accent-ink); max-width: 28ch; margin-inline: auto; }
+.tec-cta-final .lead { color: rgba(74,46,2,0.82); max-width: 50ch; margin-inline: auto; margin-top: 0.85rem; }
+.tec-cta-form {
+  max-width: 640px; margin: 2.25rem auto 0; text-align: left;
+  background: var(--paper); border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.25rem);
+  box-shadow: var(--shadow-lg);
+}
+
+/* --- Párrafos de tarjetas nuevas: justificados desde 768px (títulos y listas a la izquierda) --- */
+@media (min-width: 768px) {
+  .tec-card p,
+  .atn-mas-card p,
+  .wc-web-card p,
+  .cfg-step p,
+  .cfg-bloque > p {
+    text-align: justify;
+    hyphens: auto;
+  }
+  /* Excluidos por hueco >~40px entre palabras (medido a 1280/1440px, col. de 210px): se dejan a la izquierda.
+     "Saludos personalizados": 75px antes de "como"/"si"; "Música de espera": 39px. Vale para /soluciones/tecnologia y el resumen de la home. */
+  #adaptacion .tec-card:nth-child(1) p,
+  #adaptacion .tec-card:nth-child(3) p,
+  #tecnologia .tec-card:nth-child(1) p,
+  #tecnologia .tec-card:nth-child(3) p {
+    text-align: left;
+  }
+}
