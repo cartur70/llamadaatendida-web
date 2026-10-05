@@ -4,7 +4,7 @@ export const ATENCION_247 = {
   seo: {
     title: "Atención al Cliente 24/7 con IA y Agentes Humanos | Llamada Atendida",
     description:
-      "Sistema híbrido IA + humanos para atender llamadas, WhatsApp y chat 24/7. Sin contratos de permanencia. Pago por uso. Solicita demo.",
+      "Sistema híbrido IA + humanos para atender llamadas, WhatsApp y chat 24/7. Sin contratos de permanencia. Pago por uso. Solicita información.",
   },
 
   hero: {
@@ -111,7 +111,7 @@ export const ATENCION_247 = {
 
   ctaFinal: {
     title: "Ninguna llamada perdida. Ninguna oportunidad desaprovechada.",
-    subtitle: "Demo gratuita. Configuramos tu sistema híbrido en 48 horas. Sin permanencia.",
-    cta: "Solicitar demo gratuita",
+    subtitle: "Sin compromiso. Configuramos tu sistema híbrido en 48 horas. Sin permanencia.",
+    cta: "Solicitar información",
   },
 };

@@ -52,8 +52,14 @@ const isDropdownActive = (item) => item.dropdown?.some((child) => isActive(child
     </nav>
 
     <div class="nav-actions">
-      <Button href="/contacto" size="sm" variant="primary" class="hero-actions-desktop">
-        {BRAND.ctaPrimary}
+      <Button
+        href={BRAND.ctaAreaPrivadaHref}
+        size="sm"
+        variant="primary"
+        class="hero-actions-desktop"
+        title="Acceso al área privada de clientes"
+      >
+        {BRAND.ctaAreaPrivada}
       </Button>
       <button class="nav-burger" data-menu-toggle aria-label="Abrir menú" aria-expanded="false">
         <Icon name="menu" class="icon-menu" />
@@ -94,7 +100,9 @@ const isDropdownActive = (item) => item.dropdown?.some((child) => isActive(child
       </a>
     )
   )}
-  <Button href="/contacto" variant="primary">{BRAND.ctaPrimary}</Button>
+  <Button href={BRAND.ctaAreaPrivadaHref} variant="primary" title="Acceso al área privada de clientes">
+    {BRAND.ctaAreaPrivada}
+  </Button>
 </div>
 
 <script>
