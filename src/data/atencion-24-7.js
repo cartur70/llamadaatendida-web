@@ -43,6 +43,64 @@ export const ATENCION_247 = {
     ],
   },
 
+  masServicios: {
+    eyebrow: "Más servicios",
+    title: "Mucho más que atender llamadas",
+    lead: "Somos un contact center con muchos departamentos y secciones para tu empresa. Atendemos tu atención al cliente de forma omnicanal, con IA y agentes humanos.",
+    items: [
+      {
+        title: "Atención al cliente",
+        text: "Siempre hay alguien al otro lado del teléfono. Te enviamos un reporte con cada llamada gestionada.",
+        icon: "headset",
+      },
+      {
+        title: "Gestión de correos",
+        text: "Un equipo atiende tu email con la máxima agilidad, con gestión que no supera las 24 horas, desde webmail o tu cliente de correo.",
+        icon: "mail",
+      },
+      {
+        title: "Atendemos tu chat",
+        text: "Atendemos el chat de tu web con IA y agentes humanos, en el horario que necesites, también para clientes internacionales. Disponible en versión web y móvil.",
+        icon: "message",
+      },
+      {
+        title: "Backoffice",
+        text: "Gestionamos las tareas administrativas de tu empresa.",
+        icon: "clipboard-list",
+      },
+      {
+        title: "Gestión de citas",
+        text: "Refuerza a tu equipo comercial con citas.",
+        icon: "calendar",
+      },
+      {
+        title: "Encuestas a clientes",
+        text: "Conoce qué piensan tus clientes de tus servicios.",
+        icon: "chart-bar",
+      },
+      {
+        title: "Enriquecimiento de datos",
+        text: "Potencia tu base de datos para su tratamiento.",
+        icon: "database",
+      },
+      {
+        title: "Recobros",
+        text: "Trabajamos para que se abonen las cuotas pendientes.",
+        icon: "coin",
+      },
+      {
+        title: "Fidelización de clientes",
+        text: "Gestionamos las reclamaciones para fidelizar.",
+        icon: "heart",
+      },
+      {
+        title: "SMS empresarial",
+        text: "Potencia la comunicación con SMS.",
+        icon: "smartphone",
+      },
+    ],
+  },
+
   flujo: [
     { n: "01", title: "El cliente", text: "Te contacta por el canal que prefiere.", icon: "user" },
     { n: "02", title: "IA que atiende al instante", text: "Responde, informa, resuelve y cualifica la consulta.", icon: "bot" },

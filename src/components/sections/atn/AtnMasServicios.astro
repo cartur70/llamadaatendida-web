@@ -1,0 +1,26 @@
+---
+import { ATENCION_247 } from "../../../data/atencion-24-7.js";
+import Icon from "../../ui/Icon.astro";
+
+const { masServicios } = ATENCION_247;
+---
+
+<section class="section" id="mas-servicios">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="eyebrow">{masServicios.eyebrow}</span>
+      <h2 class="h2">{masServicios.title}</h2>
+      <p class="lead" style="margin-top:1rem;">{masServicios.lead}</p>
+    </div>
+
+    <div class="atn-mas-grid stagger">
+      {masServicios.items.map((s) => (
+        <article class="glass-card atn-mas-card">
+          <div class="icon-tile"><Icon name={s.icon} /></div>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
