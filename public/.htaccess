@@ -25,6 +25,34 @@
 # directory), double-check the actual build output folder name before relying
 # on the "^_astro/" pattern below.
 
+# ============================================================================
+# Redirecciones 301 desde las URLs de la web antigua (SEO)
+# Siempre 301 (permanente), nunca 302. Los destinos llevan "/" final porque
+# Astro genera cada página como carpeta (/soluciones/tecnologia/index.html) y
+# así se evita un segundo salto (mod_dir añadiría la barra con otro 301).
+# Reglas acotadas a rutas concretas: no afectan a archivos estáticos ni a
+# /config/tarifas.json. /contacto no necesita regla (misma URL que la antigua;
+# redirigirla a sí misma crearía un bucle).
+# NE evita que Apache codifique "#" como %23 en el destino con fragmento.
+# ============================================================================
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteRule ^index/?$                  /                          [R=301,L]
+  RewriteRule ^tecnologia/?$             /soluciones/tecnologia/    [R=301,L]
+  RewriteRule ^servicios/?$              /soluciones/atencion-24-7/ [R=301,L]
+  RewriteRule ^como_funciona/?$          /#como-funciona            [NE,R=301,L]
+  RewriteRule ^politica_de_privacidad/?$ /politica-privacidad/      [R=301,L]
+  RewriteRule ^politica_de_cookies/?$    /politica-cookies/         [R=301,L]
+  RewriteRule ^aviso_legal/?$            /aviso-legal/              [R=301,L]
+
+  # Pendientes de decidir (no activar hasta confirmar destino):
+  #   /emarketing   /nueva_ley   /prepara_tu_verano
+
+  # --- Añadir aquí más URLs antiguas (p. ej. las de Google Search Console) ---
+  # RewriteRule ^ruta-antigua/?$ /ruta-nueva/ [R=301,L]
+</IfModule>
+
 # ----- Cache duration -----
 <IfModule mod_expires.c>
   ExpiresActive On

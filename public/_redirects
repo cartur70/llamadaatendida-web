@@ -1,0 +1,22 @@
+# Redirecciones 301 desde las URLs de la web antigua (Cloudflare Pages / entorno de pruebas).
+# Formato: /origen /destino 301   — siempre 301 (permanente), nunca 302.
+# En producción (cPanel/Apache) las mismas reglas están en public/.htaccess.
+
+/index /  301
+/tecnologia /soluciones/tecnologia  301
+/servicios /soluciones/atencion-24-7  301
+/como_funciona /#como-funciona  301
+/politica_de_privacidad /politica-privacidad  301
+/politica_de_cookies /politica-cookies  301
+/aviso_legal /aviso-legal  301
+
+# /contacto no necesita regla: la URL de la web antigua es idéntica a la nueva
+# (redirigir /contacto a /contacto crearía un bucle infinito).
+
+# Pendientes de decidir (no activar hasta confirmar destino):
+#   /emarketing
+#   /nueva_ley
+#   /prepara_tu_verano
+
+# --- Añadir aquí más URLs antiguas (p. ej. las de Google Search Console) ---
+# /ruta-antigua /ruta-nueva  301
