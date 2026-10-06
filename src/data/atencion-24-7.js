@@ -155,7 +155,7 @@ export const ATENCION_247 = {
     },
     {
       q: "¿Cuánto tarda en estar operativo?",
-      a: "El sistema híbrido suele quedar activo en 48 horas desde la configuración inicial, sin interrumpir tu atención actual.",
+      a: "Podemos configurar un servicio en menos de 24 horas, sin interrumpir tu atención actual.",
     },
     {
       q: "¿Puedo escalar o reducir el servicio según mi volumen?",
@@ -169,7 +169,7 @@ export const ATENCION_247 = {
 
   ctaFinal: {
     title: "Ninguna llamada perdida. Ninguna oportunidad desaprovechada.",
-    subtitle: "Sin compromiso. Configuramos tu sistema híbrido en 48 horas. Sin permanencia.",
+    subtitle: "Sin compromiso. Configuramos tu sistema híbrido en menos de 24 horas. Sin permanencia.",
     cta: "Solicitar información",
   },
 };

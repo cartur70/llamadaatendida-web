@@ -125,7 +125,7 @@ export const BRAND = {
     },
     {
       q: "¿Cuánto tarda en estar operativo?",
-      a: "Tras la auditoría inicial, el sistema híbrido suele quedar activo en pocos días, sin interrumpir tu atención actual mientras se configura.",
+      a: "Podemos configurar un servicio en menos de 24 horas, sin interrumpir tu atención actual mientras se configura.",
     },
   ],
 };
